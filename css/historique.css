@@ -1,0 +1,1097 @@
+/* =========================================================
+   02 — HISTORIQUE
+========================================================= */
+
+.history-showcase {
+    position: relative;
+    overflow: hidden;
+
+    padding:
+        95px
+        0
+        100px;
+
+    background:
+        var(--concrete-light);
+
+    color:
+        var(--steel-deep);
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.14);
+}
+
+
+/* =========================================================
+   TECHNICAL GRID
+========================================================= */
+
+.history-showcase-grid {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(17, 27, 32, 0.045) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(17, 27, 32, 0.045) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        90px
+        90px;
+
+    opacity: 0.72;
+}
+
+
+/* =========================================================
+   INNER LAYOUT
+   Même largeur / mêmes axes que la section Entreprise
+========================================================= */
+
+.history-showcase-inner {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0
+        auto;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        150px
+        minmax(0, 1fr);
+
+    column-gap: 48px;
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.history-showcase-header {
+    display: contents;
+}
+
+
+/* =========================================================
+   SECTION INDEX
+========================================================= */
+
+.history-section-index {
+    grid-column: 1;
+    grid-row: 1;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+
+    padding-top: 6px;
+}
+
+
+.history-section-number {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 3.25rem;
+    font-weight: 700;
+
+    line-height: 0.9;
+
+    color:
+        var(--signal);
+}
+
+
+.history-section-label {
+    margin-top: 16px;
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.15em;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.history-section-index::after {
+    content: "";
+
+    width: 34px;
+    height: 3px;
+
+    margin-top: 16px;
+
+    background:
+        var(--signal);
+}
+
+
+/* =========================================================
+   SECTION HEADING
+========================================================= */
+
+.history-section-heading {
+    grid-column: 2;
+    grid-row: 1;
+
+    min-width: 0;
+
+    margin-bottom: 50px;
+}
+
+
+.history-eyebrow {
+    display: block;
+
+    margin-bottom: 18px;
+
+    font-size: 0.5rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.17em;
+
+    color:
+        rgba(17, 27, 32, 0.48);
+}
+
+
+.history-section-heading h2 {
+    max-width: 920px;
+
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            3rem,
+            4.25vw,
+            4.8rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.92;
+
+    letter-spacing: -0.025em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.history-section-heading h2 span {
+    display: block;
+
+    color:
+        transparent;
+
+    -webkit-text-stroke:
+        1.2px
+        rgba(17, 27, 32, 0.55);
+}
+
+
+/* =========================================================
+   FOCUS / SCÈNE
+========================================================= */
+
+.history-focus {
+    grid-column: 2;
+    grid-row: 2;
+
+    width: 100%;
+
+    height:
+        clamp(
+            430px,
+            55vh,
+            560px
+        );
+
+    min-height: 430px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.65fr)
+        minmax(330px, 0.62fr);
+
+    overflow: hidden;
+
+    border:
+        1px solid
+        rgba(17, 27, 32, 0.18);
+
+    background:
+        var(--steel-deep);
+}
+
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.history-media {
+    min-width: 0;
+    min-height: 0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        var(--steel);
+}
+
+
+.history-media-image {
+    width: 100%;
+    height: 100%;
+
+    position: absolute;
+    inset: 0;
+
+    display: block;
+
+    object-fit: cover;
+
+    opacity: 1;
+
+    filter:
+        saturate(0.82)
+        contrast(1.04);
+
+    transform:
+        scale(1);
+
+    transition:
+        opacity
+        0.36s
+        ease,
+        transform
+        0.82s
+        var(--ease);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.history-focus:hover
+.history-media-image {
+    transform:
+        scale(
+            1.012
+        );
+}
+
+
+/* état de sortie avant le changement d'image */
+
+.history-media.is-switching
+.history-media-image {
+    opacity: 0;
+
+    transform:
+        scale(
+            1.016
+        );
+}
+
+/* =========================================================
+   MEDIA SHADE
+========================================================= */
+
+.history-media::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    pointer-events: none;
+
+    background:
+        linear-gradient(
+            to top,
+            rgba(8, 16, 20, 0.46),
+            transparent 48%
+        );
+}
+
+
+/* =========================================================
+   MEDIA TRANSITION — CROSSFADE
+========================================================= */
+
+/*
+   L'ancien panneau rouge est volontairement désactivé.
+   La transition repose uniquement sur le fade de l'image
+   et du texte.
+*/
+
+.history-media-wipe {
+    display: none !important;
+
+    background:
+        transparent !important;
+
+    animation:
+        none !important;
+
+    transform:
+        none !important;
+}
+
+
+/* =========================================================
+   MEDIA META
+========================================================= */
+
+.history-media-meta {
+    position: absolute;
+
+    left: 24px;
+    right: 24px;
+    bottom: 20px;
+
+    z-index: 3;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: center;
+
+    gap: 20px;
+
+    font-size: 0.48rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.14em;
+
+    color:
+        rgba(255, 255, 255, 0.72);
+}
+
+
+.history-media-year {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    letter-spacing: 0.05em;
+
+    color:
+        var(--white);
+}
+
+
+/* =========================================================
+   COPY
+========================================================= */
+
+.history-copy {
+    min-width: 0;
+    min-height: 0;
+
+    padding:
+        28px
+        30px
+        26px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    background:
+        var(--steel-deep);
+
+    color:
+        var(--white);
+
+    border-left:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+}
+
+
+/* =========================================================
+   COPY TOP
+========================================================= */
+
+.history-copy-top {
+    display: flex;
+
+    justify-content: space-between;
+
+    align-items: flex-start;
+
+    gap: 20px;
+
+    font-size: 0.46rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.13em;
+
+    color:
+        rgba(255, 255, 255, 0.48);
+}
+
+
+.history-status {
+    text-align: right;
+}
+
+
+/* =========================================================
+   COPY CONTENT
+========================================================= */
+
+.history-copy-content {
+    min-width: 0;
+
+    opacity: 1;
+
+    transform:
+        translateY(
+            0
+        );
+
+    transition:
+        opacity
+        0.28s
+        ease,
+        transform
+        0.42s
+        var(--ease);
+
+    will-change:
+        opacity,
+        transform;
+}
+
+
+.history-copy-content.is-out {
+    opacity: 0;
+
+    transform:
+        translateY(
+            6px
+        );
+}
+
+.history-active-year {
+    display: block;
+
+    margin-bottom: 12px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            4rem,
+            5.7vw,
+            6.2rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.85;
+
+    letter-spacing: -0.025em;
+
+    color:
+        var(--signal);
+}
+
+
+.history-active-title {
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            1.8rem,
+            2.25vw,
+            2.6rem
+        );
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+
+    color:
+        var(--white);
+}
+
+
+.history-active-title::after {
+    content: "";
+
+    width: 38px;
+    height: 3px;
+
+    display: block;
+
+    margin:
+        17px
+        0;
+
+    background:
+        var(--signal);
+}
+
+
+.history-active-text {
+    max-width: 340px;
+
+    margin: 0;
+
+    font-size: 0.76rem;
+
+    line-height: 1.7;
+
+    color:
+        rgba(255, 255, 255, 0.66);
+}
+
+
+/* =========================================================
+   COPY BOTTOM
+========================================================= */
+
+.history-copy-bottom {
+    padding-top: 18px;
+
+    display: flex;
+
+    justify-content: space-between;
+
+    gap: 20px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.13);
+
+    font-size: 0.44rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.13em;
+
+    color:
+        rgba(255, 255, 255, 0.42);
+}
+
+
+/* =========================================================
+   TIMELINE WRAPPER
+========================================================= */
+
+.history-timeline-wrapper {
+    grid-column: 2;
+    grid-row: 3;
+
+    width: 100%;
+
+    margin-top: 30px;
+
+    padding-top: 4px;
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+
+.history-timeline-wrapper::-webkit-scrollbar {
+    display: none;
+}
+
+
+.history-timeline {
+    min-width: 900px;
+
+    position: relative;
+}
+
+
+/* =========================================================
+   TIMELINE TRACK
+========================================================= */
+
+.history-timeline-track {
+    position: absolute;
+
+    left: 0;
+    right: 0;
+
+    bottom: 9px;
+
+    height: 2px;
+
+    pointer-events: none;
+}
+
+
+.history-timeline-line,
+.history-timeline-progress {
+    height: 2px;
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+}
+
+
+.history-timeline-line {
+    width: 100%;
+
+    background:
+        rgba(17, 27, 32, 0.2);
+}
+
+
+.history-timeline-progress {
+    width: 0;
+
+    background:
+        var(--signal);
+
+    transition:
+        width
+        0.55s
+        var(--ease);
+}
+
+
+/* =========================================================
+   DATES
+========================================================= */
+
+.history-timeline-dates {
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, 1fr);
+}
+
+
+.history-date {
+    min-height: 72px;
+
+    padding: 0;
+
+    position: relative;
+
+    border: 0;
+
+    background:
+        transparent;
+
+    color:
+        rgba(17, 27, 32, 0.44);
+
+    cursor: pointer;
+
+    text-align: left;
+
+    font-family:
+        inherit;
+}
+
+
+.history-date-year {
+    display: block;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.9rem;
+    font-weight: 600;
+
+    line-height: 1;
+
+    transition:
+        color
+        0.3s
+        ease,
+        transform
+        0.35s
+        var(--ease);
+}
+
+
+.history-date-marker {
+    width: 13px;
+    height: 13px;
+
+    position: absolute;
+
+    left: 0;
+    bottom: 3px;
+
+    z-index: 2;
+
+    border:
+        2px solid
+        var(--signal);
+
+    background:
+        var(--concrete-light);
+
+    transform:
+        rotate(
+            45deg
+        );
+
+    transition:
+        background
+        0.3s
+        ease,
+        transform
+        0.35s
+        var(--ease);
+}
+
+
+/* =========================================================
+   ACTIVE DATE
+========================================================= */
+
+.history-date.is-active
+.history-date-year {
+    color:
+        var(--signal);
+
+    transform:
+        translateY(
+            -4px
+        );
+}
+
+
+.history-date.is-active
+.history-date-marker {
+    background:
+        var(--signal);
+
+    transform:
+        rotate(
+            45deg
+        )
+        scale(
+            1.22
+        );
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .history-date:hover
+    .history-date-year {
+        color:
+            var(--signal);
+    }
+
+
+    .history-date:hover
+    .history-date-marker {
+        background:
+            var(--signal);
+
+        transform:
+            rotate(
+                45deg
+            )
+            scale(
+                1.15
+            );
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .history-showcase {
+        padding:
+            85px
+            0
+            90px;
+    }
+
+
+    .history-showcase-inner {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+
+        grid-template-columns:
+            100px
+            minmax(0, 1fr);
+
+        column-gap: 32px;
+    }
+
+
+    .history-section-heading {
+        margin-bottom: 42px;
+    }
+
+
+    .history-focus {
+        height: auto;
+        min-height: 0;
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .history-media {
+        min-height: 400px;
+    }
+
+
+    .history-copy {
+        min-height: 310px;
+
+        border-left: 0;
+
+        border-top:
+            1px solid
+            rgba(255, 255, 255, 0.13);
+    }
+
+
+    .history-timeline-wrapper {
+        margin-top: 28px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .history-showcase {
+        padding:
+            70px
+            0
+            75px;
+    }
+
+
+    .history-showcase-inner {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        display: block;
+    }
+
+
+    .history-showcase-header {
+        display: block;
+    }
+
+
+    .history-section-index {
+        margin-bottom: 36px;
+
+        padding: 0;
+
+        flex-direction: row;
+
+        align-items: baseline;
+
+        gap: 14px;
+    }
+
+
+    .history-section-index::after {
+        display: none;
+    }
+
+
+    .history-section-number {
+        font-size: 2.5rem;
+    }
+
+
+    .history-section-label {
+        margin: 0;
+
+        font-size: 0.52rem;
+    }
+
+
+    .history-section-heading {
+        margin-bottom: 36px;
+    }
+
+
+    .history-section-heading h2 {
+        font-size:
+            clamp(
+                2.8rem,
+                12vw,
+                4rem
+            );
+    }
+
+
+    .history-focus {
+        width: 100%;
+    }
+
+
+    .history-media {
+        min-height: 280px;
+    }
+
+
+    .history-media-meta {
+        left: 16px;
+        right: 16px;
+        bottom: 14px;
+    }
+
+
+    .history-copy {
+        min-height: 300px;
+
+        padding:
+            24px
+            20px;
+    }
+
+
+    .history-active-year {
+        font-size: 4rem;
+    }
+
+
+    .history-active-title {
+        font-size: 1.8rem;
+    }
+
+
+    .history-timeline-wrapper {
+        width: 100%;
+
+        margin-top: 24px;
+    }
+
+
+    .history-timeline {
+        min-width: 690px;
+    }
+
+
+    .history-date {
+        min-height: 66px;
+    }
+
+
+    .history-date-year {
+        font-size: 1.65rem;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .history-media-wipe {
+        display: none;
+    }
+
+
+    .history-media-image,
+    .history-copy-content,
+    .history-timeline-progress,
+    .history-date-year,
+    .history-date-marker {
+        transition: none;
+        animation: none;
+    }
+
+}

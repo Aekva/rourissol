@@ -1,0 +1,865 @@
+<!DOCTYPE html>
+<html lang="fr">
+  <head>
+    <meta charset="UTF-8" />
+
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+    <title>Rourissol — Bâtiment & Génie Civil</title>
+
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+    <link
+      href="https://fonts.googleapis.com/css2?family=Barlow+Condensed:wght@400;500;600;700&family=IBM+Plex+Sans:wght@300;400;500;600&display=swap"
+      rel="stylesheet"
+    />
+
+    <link rel="stylesheet" href="css/style.css">
+    <link rel="stylesheet" href="css/historique.css">
+    <link rel="stylesheet" href="css/historique-dial.css">
+    <link rel="stylesheet" href="css/chiffres.css">
+    <link rel="stylesheet" href="css/metiers.css">
+
+</head>
+
+  <body>
+    <!-- =========================================
+         OPENING
+    ========================================== -->
+
+    <div class="opening" aria-hidden="true">
+      <div class="opening-grid"></div>
+
+      <span class="opening-corner opening-corner-tl"></span>
+      <span class="opening-corner opening-corner-tr"></span>
+      <span class="opening-corner opening-corner-bl"></span>
+      <span class="opening-corner opening-corner-br"></span>
+
+      <div class="opening-top">
+        <span> ENTREPRISE GÉNÉRALE </span>
+
+        <span> BÂTIMENT / GÉNIE CIVIL </span>
+      </div>
+
+      <div class="opening-content">
+        <span class="opening-reference"> REF. RSL / 2026 </span>
+
+        <div class="opening-brand-mask">
+          <img
+            src="images/logo-rourissol.png"
+            alt="Rourissol"
+            class="opening-logo"
+          />
+        </div>
+
+        <div class="opening-rule">
+          <span></span>
+        </div>
+
+        <div class="opening-meta">
+          <span> DEPUIS 1969 </span>
+
+          <span> ARC MÉDITERRANÉEN </span>
+        </div>
+      </div>
+
+      <div class="opening-coordinates">
+        <span> 44°07' N </span>
+
+        <span> 04°05' E </span>
+      </div>
+
+      <div class="opening-shutter"></div>
+    </div>
+
+    <!-- =========================================
+     NAVBAR
+========================================== -->
+
+    <header class="navbar" id="site-navbar">
+      <div class="navbar-left">
+        <a href="#accueil" class="logo">
+          <img src="images/logo-rourissol.png" alt="Rourissol" />
+        </a>
+
+        <span class="logo-meta"> Bâtiment / Génie civil </span>
+      </div>
+
+      <!-- NAVIGATION QUI APPARAÎT APRÈS LE HERO -->
+
+      <nav class="navbar-main-nav" aria-label="Navigation principale">
+        <a href="#entreprise" data-section="entreprise"> Entreprise </a>
+
+        <a href="#historique" data-section="historique"> Historique </a>
+
+        <a href="#realisations" data-section="realisations"> Réalisations </a>
+
+        <a href="#references" data-section="references"> Références </a>
+
+        <a href="#recrutement" data-section="recrutement"> Recrutement </a>
+      </nav>
+
+      <div class="navbar-actions">
+        <!-- BURGER MOBILE -->
+
+        <button
+          class="navbar-burger"
+          type="button"
+          aria-label="Ouvrir le menu"
+          aria-expanded="false"
+          aria-controls="mobile-nav"
+        >
+          <span></span>
+          <span></span>
+        </button>
+
+        <a href="#contact" class="nav-contact">
+          <span> Contact </span>
+
+          <span> ↗ </span>
+        </a>
+      </div>
+    </header>
+
+    <!-- =========================================
+     MENU MOBILE
+========================================== -->
+
+    <nav class="mobile-nav" id="mobile-nav" aria-label="Navigation mobile">
+      <a href="#entreprise">
+        <span>01</span>
+        Entreprise
+      </a>
+
+      <a href="#historique">
+        <span>02</span>
+        Historique
+      </a>
+
+      <a href="#realisations">
+        <span>03</span>
+        Réalisations
+      </a>
+
+      <a href="#references">
+        <span>04</span>
+        Références
+      </a>
+
+      <a href="#recrutement">
+        <span>05</span>
+        Recrutement
+      </a>
+
+      <a href="#contact" class="mobile-nav-contact">
+        <span>06</span>
+        Contact
+        <span class="mobile-nav-contact-arrow">↗</span>
+    </a>
+    </nav>
+
+    <main>
+      <!-- =========================================
+             HERO
+        ========================================== -->
+
+      <section class="hero" id="accueil">
+        <div class="hero-media">
+          <video
+            autoplay
+            muted
+            loop
+            playsinline
+            preload="auto"
+            aria-hidden="true"
+          >
+            <source src="media/hero-video.mp4" type="video/mp4" />
+          </video>
+        </div>
+
+        <div class="hero-overlay"></div>
+
+        <!-- TRAME TECHNIQUE -->
+
+        <div class="technical-grid"></div>
+
+        <!-- LIGNES LATÉRALES -->
+
+        <div class="hero-rail hero-rail-left"></div>
+
+        <div class="hero-rail hero-rail-right"></div>
+
+        <div class="hero-layout">
+          <!-- =========================
+                     COLONNE GAUCHE
+                ========================== -->
+
+          <nav class="hero-side-nav">
+            <a href="#entreprise">
+              <span>01</span>
+              Entreprise
+            </a>
+
+            <a href="#historique">
+              <span>02</span>
+              Historique
+            </a>
+
+            <a href="#realisations">
+              <span>03</span>
+              Réalisations
+            </a>
+
+            <a href="#references">
+              <span>04</span>
+              Références
+            </a>
+
+            <a href="#recrutement">
+              <span>05</span>
+              Recrutement
+            </a>
+          </nav>
+
+          <!-- =========================
+                     CONTENU
+                ========================== -->
+
+          <div class="hero-content">
+            <div class="hero-topline">
+              <span> BÂTIMENT </span>
+
+              <span> GÉNIE CIVIL </span>
+
+              <span> RÉHABILITATION </span>
+            </div>
+
+            <h1 class="hero-title">
+              <span class="title-line">
+                <span> BÂTIR. </span>
+              </span>
+
+              <span class="title-line title-line-outline">
+                <span> RENFORCER. </span>
+              </span>
+
+              <span class="title-line">
+                <span> TRANSMETTRE. </span>
+              </span>
+            </h1>
+
+            <div class="hero-bottom">
+              <div class="hero-description">
+                <span class="hero-description-line"></span>
+
+                <p>
+                  Rourissol accompagne les maîtres d'ouvrage publics et privés
+                  dans la réalisation d'ouvrages techniques et durables.
+                </p>
+              </div>
+
+              <a href="#realisations" class="hero-cta">
+                <span> Voir les réalisations </span>
+
+                <span class="hero-cta-arrow"> ↘ </span>
+              </a>
+            </div>
+          </div>
+
+          <!-- =========================
+                     FICHE PROJET
+                ========================== -->
+
+          <aside class="hero-project">
+            <div class="hero-project-content">
+              <span class="project-label"> Réalisation à la une </span>
+
+              <div class="project-number">6 500 M²</div>
+
+              <div class="project-separator"></div>
+
+              <h2>
+                IMT<br />
+                MINES<br />
+                ALÈS
+              </h2>
+
+              <div class="project-meta">
+                <span>ALÈS</span>
+                <span>BÂTIMENT</span>
+              </div>
+            </div>
+
+            <div class="hero-project-bg">
+              <div class="project-image-slider">
+                <img src="images/hero-card-alaune.png" alt="IMT Mines Alès" />
+              </div>
+            </div>
+
+            <a href="#realisations" class="project-link">
+              <span>Voir le projet</span>
+              <span>↗</span>
+            </a>
+          </aside>
+        </div>
+
+        <!-- =========================
+                 FOOTER HERO
+            ========================== -->
+
+        <div class="hero-footer-line">
+          <span> ROURISSOL.FR </span>
+
+          <span class="hero-footer-center">
+            ENTREPRISE FAMILIALE · DEPUIS 1969
+          </span>
+
+          <span> SCROLL ↓ </span>
+        </div>
+      </section>
+
+      <section class="company-presentation" id="entreprise">
+        <div class="section-grid"></div>
+
+        <div class="company-presentation-inner">
+          <div class="company-presentation-side">
+            <span class="section-number">01</span>
+            <span class="section-label">L’ENTREPRISE</span>
+          </div>
+
+          <div class="company-presentation-content">
+            <div class="company-presentation-head">
+              <h2>L’AVENIR SE CONSTRUIT ENTRE NOUS</h2>
+
+              <p class="company-presentation-subtitle">
+                Les valeurs d’une entreprise familiale, les qualités d’un expert
+                du bâtiment et du génie civil.
+              </p>
+            </div>
+
+            <div class="company-presentation-body">
+              <div class="company-presentation-image">
+                <img
+                  src="images/image-presentation.png"
+                  alt="Équipe Rourissol sur chantier"
+                />
+              </div>
+
+              <div class="company-presentation-text">
+                <p>
+                  Riche de près de 80 salariés, l’entreprise Rourissol
+                  accompagne les bâtisseurs en proposant des prestations de
+                  génie civil, de gros œuvre en bâtiment, d’isolation acoustique
+                  ou de réparations d’ouvrages dans tout l’arc méditerranéen.
+                </p>
+
+                <p>
+                  Au cours du temps, l’entreprise a su grandir et s’imposer
+                  comme un prestataire de confiance auprès de promoteurs
+                  indépendants, de groupes immobiliers, d’architectes ou de
+                  sociétés autoroutières.
+                </p>
+
+                <p>
+                  Tout en plaçant sans discontinuer l’humain au cœur de ses
+                  préoccupations, l’entreprise Rourissol sait aussi faire preuve
+                  de réactivité et de rigueur pour mener à bien les missions qui
+                  lui sont confiées tout au long de l’année.
+                </p>
+
+                <p>
+                  Cette approche lui permet de s’appuyer sur un personnel fidèle
+                  et de qualité, investi dans les chantiers de l’entreprise.
+                </p>
+
+                <p>
+                  Conjugué à une haute exigence, quel que soit le type de
+                  prestations effectuées, ce savoir-faire contribue à la
+                  notoriété de l’entreprise sur le marché du bâtiment.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- =========================================
+             HISTORIQUE
+        ========================================== -->
+
+    <section class="history-showcase" id="historique">
+        <div class="history-showcase-grid"></div>
+
+        <div class="history-showcase-inner">
+          <!-- =========================
+             INTRO
+        ========================== -->
+
+          <header class="history-showcase-header">
+            <div class="history-section-index">
+              <span class="history-section-number"> 02 </span>
+
+              <span class="history-section-label"> Historique </span>
+            </div>
+
+            <div class="history-section-heading">
+              <span class="history-eyebrow"> ROURISSOL · DEPUIS 1969 </span>
+
+              <h2>
+                PLUS DE 50 ANS
+                <span>D’HISTOIRE ET DE TRANSMISSION.</span>
+              </h2>
+            </div>
+          </header>
+
+          <!-- =========================
+             FOCUS / DIAPORAMA
+        ========================== -->
+
+          <div class="history-focus">
+            <!-- IMAGE -->
+
+            <div class="history-media">
+              <img class="history-media-image" src="" alt="" />
+
+              <div class="history-media-wipe" aria-hidden="true"></div>
+
+              <div class="history-media-meta">
+                <span> ARCHIVES / ROURISSOL </span>
+
+                <span class="history-media-year"> 1969 </span>
+              </div>
+            </div>
+
+            <!-- TEXTE -->
+
+            <div class="history-copy">
+              <div class="history-copy-top">
+                <span class="history-counter"> 01 / 07 </span>
+
+                <span class="history-status"> Lecture automatique </span>
+              </div>
+
+              <div class="history-copy-content">
+                <span class="history-active-year"> 1969 </span>
+
+                <h3 class="history-active-title">Création</h3>
+
+                <p class="history-active-text">
+                  Raymond Rourissol fonde l’entreprise.
+                </p>
+              </div>
+
+              <div class="history-copy-bottom">
+                <span> BÂTIMENT </span>
+
+                <span> GÉNIE CIVIL </span>
+              </div>
+            </div>
+          </div>
+
+          <!-- =========================
+             TIMELINE
+        ========================== -->
+
+          <div class="history-timeline-wrapper">
+            <div
+              class="history-timeline"
+              role="group"
+              aria-label="Chronologie Rourissol"
+            >
+              <div class="history-timeline-track">
+                <span class="history-timeline-line"></span>
+
+                <span class="history-timeline-progress"></span>
+              </div>
+
+              <div class="history-timeline-dates">
+                <!-- généré automatiquement par historique.js -->
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- =========================================================
+     03 — CHIFFRES CLÉS
+========================================================== -->
+
+<section
+class="keyfigures"
+id="chiffres"
+>
+
+<div
+    class="keyfigures-grid"
+    aria-hidden="true"
+></div>
+
+
+<div class="keyfigures-inner">
+
+    <!-- =========================
+         EN-TÊTE
+    ========================== -->
+
+    <header class="keyfigures-header">
+
+        <div class="keyfigures-index">
+
+            <span class="keyfigures-number">
+                03
+            </span>
+
+            <span class="keyfigures-label">
+                Chiffres clés
+            </span>
+
+        </div>
+
+
+        <div class="keyfigures-heading">
+
+            <span class="keyfigures-eyebrow">
+                ROURISSOL · EN QUELQUES CHIFFRES
+            </span>
+
+            <h2>
+                ROURISSOL,
+                <span>
+                    À L’ÉCHELLE DU TERRAIN.
+                </span>
+            </h2>
+
+            <p>
+                Des décennies d’expérience,
+                des équipes engagées et plusieurs
+                centaines d’opérations chaque année.
+            </p>
+
+        </div>
+
+    </header>
+
+
+    <!-- =========================
+         GRILLE
+    ========================== -->
+
+    <div class="keyfigures-board">
+
+
+        <!-- CA -->
+
+        <article
+            class="
+                keyfigure-card
+                keyfigure-card-main
+            "
+        >
+
+            <div class="keyfigure-card-top">
+
+                <span class="keyfigure-ref">
+                    RSL / 01
+                </span>
+
+                <span class="keyfigure-year">
+                    2023
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-main-value">
+
+                <span class="keyfigure-value">
+                    16,3
+                </span>
+
+                <span class="keyfigure-unit">
+                    M€
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-card-bottom">
+
+                <span class="keyfigure-title">
+                    Chiffre d’affaires
+                </span>
+
+                <span class="keyfigure-meta">
+                    Exercice 2023
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- SALARIÉS -->
+
+        <article
+            class="
+                keyfigure-card
+                keyfigure-card-employees
+            "
+        >
+
+            <div class="keyfigure-card-top">
+
+                <span class="keyfigure-ref">
+                    RSL / 02
+                </span>
+
+                <span class="keyfigure-cross">
+                    +
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-standard-value">
+
+                <span class="keyfigure-value">
+                    80
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-card-bottom">
+
+                <span class="keyfigure-title">
+                    Salariés
+                </span>
+
+                <span class="keyfigure-meta">
+                    Une expertise collective
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- CHANTIERS -->
+
+        <article
+            class="
+                keyfigure-card
+                keyfigure-card-projects
+            "
+        >
+
+            <div class="keyfigure-card-top">
+
+                <span class="keyfigure-ref">
+                    RSL / 03
+                </span>
+
+                <span class="keyfigure-cross">
+                    +
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-standard-value">
+
+                <span class="keyfigure-value">
+                    300
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-card-bottom">
+
+                <span class="keyfigure-title">
+                    Chantiers / an
+                </span>
+
+                <span class="keyfigure-meta">
+                    Sur l’Arc méditerranéen
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- HISTOIRE -->
+
+        <article
+            class="
+                keyfigure-card
+                keyfigure-card-history
+            "
+        >
+
+            <div class="keyfigure-card-top">
+
+                <span class="keyfigure-ref">
+                    RSL / 04
+                </span>
+
+                <span class="keyfigure-cross">
+                    +
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-history-scale">
+
+                <div class="keyfigure-history-years">
+
+                    <span>
+                        1969
+                    </span>
+
+                    <span>
+                        2026
+                    </span>
+
+                </div>
+
+
+                <div class="keyfigure-history-line">
+
+                    <span
+                        class="keyfigure-history-progress"
+                    ></span>
+
+                </div>
+
+
+                <div class="keyfigure-history-value">
+
+                    <span class="keyfigure-value">
+                        57
+                    </span>
+
+                    <span class="keyfigure-history-unit">
+                        ans
+                    </span>
+
+                </div>
+
+            </div>
+
+
+            <div class="keyfigure-card-bottom">
+
+                <span class="keyfigure-title">
+                    Années d’histoire
+                </span>
+
+                <span class="keyfigure-meta">
+                    Depuis 1969
+                </span>
+
+            </div>
+
+        </article>
+
+
+        <!-- IMPLANTATIONS -->
+
+        <article
+            class="
+                keyfigure-card
+                keyfigure-card-locations
+            "
+        >
+
+            <div class="keyfigure-card-top">
+
+                <span class="keyfigure-ref">
+                    RSL / 05
+                </span>
+
+                <span class="keyfigure-cross">
+                    +
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-location-value">
+
+                <span class="keyfigure-value">
+                    02
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-locations">
+
+                <span>
+                    <i></i>
+                    Alès
+                </span>
+
+                <span>
+                    <i></i>
+                    Var
+                </span>
+
+            </div>
+
+
+            <div class="keyfigure-card-bottom">
+
+                <span class="keyfigure-title">
+                    Implantations
+                </span>
+
+                <span class="keyfigure-meta">
+                    Occitanie · Provence
+                </span>
+
+            </div>
+
+        </article>
+
+    </div>
+
+
+    <!-- =========================
+         FOOTER TECHNIQUE
+    ========================== -->
+
+    <footer class="keyfigures-footer">
+
+        <span>
+            RSL / DONNÉES ENTREPRISE
+        </span>
+
+        <span>
+            BÂTIMENT · GÉNIE CIVIL
+        </span>
+
+        <span>
+            2026
+        </span>
+
+    </footer>
+
+</div>
+
+</section>
+    </main>
+
+    <script src="js/script.js"></script>
+    <script src="js/historique.js"></script>
+    <script src="js/historique-dial.js"></script>
+    <script src="js/chiffres.js"></script>
+    <script src="js/metiers.js"></script>
+  </body>
+</html>

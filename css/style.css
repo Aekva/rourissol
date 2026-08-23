@@ -1,0 +1,4103 @@
+/* =========================================================
+   VARIABLES
+========================================================= */
+
+:root {
+    --steel: #1e2b31;
+    --steel-deep: #111b20;
+
+    --concrete: #d8d5cc;
+    --concrete-light: #ece9e1;
+
+    --signal: #ff3038;
+    --signal-dark: #d91f2a;
+
+    --white: #f4f2ec;
+    --black: #111416;
+
+    --line-light: rgba(255, 255, 255, 0.22);
+    --line-dark: rgba(17, 20, 22, 0.18);
+
+    --navbar-height: 86px;
+    --hero-footer-height: 44px;
+    --side-nav-width: 165px;
+    --project-width: 255px;
+
+    --ease: cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+
+/* =========================================================
+   RESET
+========================================================= */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+html {
+    scroll-behavior: smooth;
+}
+
+body {
+    min-height: 100vh;
+    overflow-x: hidden;
+
+    background: var(--steel);
+
+    color: var(--white);
+
+    font-family:
+        "IBM Plex Sans",
+        sans-serif;
+}
+
+a {
+    color: inherit;
+    text-decoration: none;
+}
+
+img,
+video {
+    display: block;
+    width: 100%;
+}
+
+
+/* =========================================================
+   HALO GLOBAL
+========================================================= */
+
+body::before {
+    content: "";
+
+    position: fixed;
+    inset: 0;
+
+    z-index: 4;
+
+    pointer-events: none;
+
+    background:
+        radial-gradient(
+            circle 160px at var(--halo-x, 50%) var(--halo-y, 50%),
+            rgba(255, 255, 255, 0.16) 0%,
+            rgba(255, 255, 255, 0.08) 35%,
+            rgba(255, 255, 255, 0.025) 55%,
+            transparent 72%
+        );
+
+    mix-blend-mode: screen;
+}
+
+
+/* =========================================================
+   OPENING
+========================================================= */
+
+.opening {
+    position: fixed;
+    inset: 0;
+
+    z-index: 9999;
+
+    overflow: hidden;
+
+    background: var(--steel-deep);
+    color: var(--white);
+
+    pointer-events: none;
+
+    clip-path: inset(0 0 0 0);
+
+    will-change: clip-path, opacity;
+
+    animation:
+        openingReveal 1.2s var(--ease) 1.9s forwards,
+        openingRemove 0.01s linear 3.62s forwards;
+}
+
+
+/* =========================================================
+   OPENING GRID
+========================================================= */
+
+.opening-grid {
+    position: absolute;
+    inset: 0;
+
+    opacity: 0;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size: 70px 70px;
+
+    animation:
+        gridReveal
+        0.8s
+        ease
+        0.1s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING CORNERS
+========================================================= */
+
+.opening-corner {
+    width: 35px;
+    height: 35px;
+
+    position: absolute;
+
+    z-index: 3;
+
+    opacity: 0;
+
+    animation:
+        cornerReveal
+        0.5s
+        ease
+        0.35s
+        forwards;
+}
+
+.opening-corner-tl {
+    top: 35px;
+    left: 35px;
+
+    border-top:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+
+    border-left:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+}
+
+.opening-corner-tr {
+    top: 35px;
+    right: 35px;
+
+    border-top:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+
+    border-right:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+}
+
+.opening-corner-bl {
+    bottom: 35px;
+    left: 35px;
+
+    border-bottom:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+
+    border-left:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+}
+
+.opening-corner-br {
+    right: 35px;
+    bottom: 35px;
+
+    border-right:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+
+    border-bottom:
+        2px solid
+        rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================================
+   OPENING TOP
+========================================================= */
+
+.opening-top {
+    position: absolute;
+
+    top: 40px;
+    left: 50%;
+
+    width: calc(100% - 160px);
+
+    z-index: 3;
+
+    display: flex;
+    justify-content: space-between;
+
+    transform: translateX(-50%);
+
+    opacity: 0;
+
+    font-size: 0.55rem;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.16em;
+
+    animation:
+        simpleReveal
+        0.6s
+        ease
+        0.4s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING CONTENT
+========================================================= */
+
+.opening-content {
+    width: min(900px, 82%);
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    z-index: 5;
+
+    transform: translate(-50%, -50%);
+}
+
+.opening-reference {
+    display: block;
+
+    margin-bottom: 15px;
+
+    opacity: 0;
+
+    font-size: 0.55rem;
+    font-weight: 500;
+
+    letter-spacing: 0.15em;
+
+    animation:
+        simpleReveal
+        0.6s
+        ease
+        0.4s
+        forwards;
+}
+
+.opening-brand-mask {
+    overflow: hidden;
+
+    display: flex;
+    justify-content: center;
+}
+
+.opening-logo {
+    width: clamp(280px, 38vw, 580px);
+    height: auto;
+
+    opacity: 0;
+
+    transform: translateY(70px);
+
+    animation:
+        logoReveal
+        1s
+        var(--ease)
+        0.5s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING RULE
+========================================================= */
+
+.opening-rule {
+    width: 100%;
+    height: 2px;
+
+    margin-top: 35px;
+
+    overflow: hidden;
+
+    background:
+        rgba(255, 255, 255, 0.12);
+}
+
+.opening-rule span {
+    display: block;
+
+    width: 0;
+    height: 100%;
+
+    background: var(--signal);
+
+    animation:
+        ruleDraw
+        0.9s
+        var(--ease)
+        1s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING META
+========================================================= */
+
+.opening-meta {
+    margin-top: 15px;
+
+    display: flex;
+    justify-content: space-between;
+
+    opacity: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 0.78rem;
+    font-weight: 600;
+
+    letter-spacing: 0.1em;
+
+    animation:
+        simpleReveal
+        0.5s
+        ease
+        1.25s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING COORDINATES
+========================================================= */
+
+.opening-coordinates {
+    position: absolute;
+
+    left: 40px;
+    bottom: 45px;
+
+    z-index: 4;
+
+    display: flex;
+
+    gap: 20px;
+
+    opacity: 0;
+
+    font-size: 0.52rem;
+
+    letter-spacing: 0.12em;
+
+    animation:
+        simpleReveal
+        0.5s
+        ease
+        0.7s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING SHUTTER
+========================================================= */
+
+.opening-shutter {
+    position: absolute;
+    inset: 0;
+
+    z-index: 10;
+
+    background: var(--steel-deep);
+
+    transform: translateY(100%);
+
+    will-change: transform;
+
+    animation:
+        shutterReveal
+        0.8s
+        var(--ease)
+        1.85s
+        forwards;
+}
+
+
+/* =========================================================
+   OPENING KEYFRAMES
+========================================================= */
+
+@keyframes gridReveal {
+    to {
+        opacity: 1;
+    }
+}
+
+@keyframes cornerReveal {
+    from {
+        opacity: 0;
+        transform: scale(0.75);
+    }
+
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+@keyframes simpleReveal {
+    from {
+        opacity: 0;
+        transform: translateY(10px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes logoReveal {
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+@keyframes ruleDraw {
+    to {
+        width: 100%;
+    }
+}
+
+@keyframes shutterReveal {
+    from {
+        transform: translateY(100%);
+    }
+
+    to {
+        transform: translateY(0);
+    }
+}
+
+@keyframes openingReveal {
+    from {
+        clip-path: inset(0 0 0 0);
+    }
+
+    to {
+        clip-path: inset(0 0 100% 0);
+    }
+}
+
+@keyframes openingRemove {
+    to {
+        visibility: hidden;
+        opacity: 0;
+    }
+}
+
+
+/* =========================================================
+   NAVBAR
+========================================================= */
+
+.navbar {
+    width: 100%;
+    min-height: var(--navbar-height);
+
+    position: absolute;
+
+    top: 0;
+    left: 0;
+
+    z-index: 100;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        auto;
+
+    align-items: stretch;
+
+    border-bottom:
+        1px solid
+        var(--line-light);
+
+    opacity: 0;
+
+    animation:
+        heroReveal
+        0.8s
+        var(--ease)
+        2.65s
+        forwards;
+}
+
+
+/* =========================================================
+   NAVBAR LEFT
+========================================================= */
+
+.navbar-left {
+    padding:
+        0
+        35px;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 20px;
+}
+
+.logo {
+    width: 155px;
+
+    display: flex;
+    align-items: center;
+
+    flex-shrink: 0;
+}
+
+.logo img {
+    width: 100%;
+    height: auto;
+
+    object-fit: contain;
+}
+
+.logo-meta {
+    padding-left: 20px;
+
+    border-left:
+        1px solid
+        var(--line-light);
+
+    font-size: 0.5rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.13em;
+
+    color:
+        rgba(255, 255, 255, 0.5);
+}
+
+
+/* =========================================================
+   NAVBAR CONTACT
+========================================================= */
+
+.nav-contact {
+    width: var(--project-width);
+    min-width: var(--project-width);
+    padding:
+        0
+        30px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+
+    background: var(--signal);
+
+    color: var(--white);
+
+    font-size: 0.57rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.1em;
+
+    transition:
+        background
+        0.25s ease;
+}
+
+.nav-contact:hover {
+    background: var(--signal-dark);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.hero {
+    min-height: 100vh;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background: var(--steel-deep);
+
+    color: var(--white);
+}
+
+
+/* =========================================================
+   HERO VIDEO
+========================================================= */
+
+.hero-media {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    overflow: hidden;
+}
+
+.hero-media video {
+    width: 100%;
+    height: 100%;
+
+    object-fit: cover;
+
+    opacity: 0;
+
+    transform: scale(1.06);
+
+    will-change:
+        transform,
+        opacity;
+
+    animation:
+        heroVideoReveal
+        1.8s
+        var(--ease)
+        2.15s
+        forwards;
+}
+
+
+/* =========================================================
+   HERO OVERLAY
+========================================================= */
+
+.hero-overlay {
+    position: absolute;
+    inset: 0;
+
+    z-index: 1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(17, 27, 32, 0.94) 0%,
+            rgba(17, 27, 32, 0.74) 45%,
+            rgba(17, 27, 32, 0.35) 100%
+        ),
+        linear-gradient(
+            to top,
+            rgba(10, 15, 18, 0.82) 0%,
+            transparent 52%
+        );
+}
+
+
+/* =========================================================
+   TECHNICAL GRID
+========================================================= */
+
+.technical-grid {
+    position: absolute;
+    inset: 0;
+
+    z-index: 2;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        80px
+        80px;
+}
+
+
+/* =========================================================
+   HERO RAILS
+========================================================= */
+
+.hero-rail {
+    position: absolute;
+
+    top: var(--navbar-height);
+    bottom: 0;
+
+    z-index: 3;
+
+    width: 1px;
+
+    background: var(--line-light);
+
+    pointer-events: none;
+}
+
+.hero-rail-left {
+    left: var(--side-nav-width);
+}
+
+.hero-rail-right {
+    right: var(--project-width);
+}
+
+
+/* =========================================================
+   HERO LAYOUT
+========================================================= */
+
+.hero-layout {
+    min-height: 100vh;
+
+    position: relative;
+
+    z-index: 5;
+
+    display: grid;
+
+    grid-template-columns:
+        var(--side-nav-width)
+        minmax(0, 1fr)
+        var(--project-width);
+
+    padding-top:
+        var(--navbar-height);
+}
+
+
+/* =========================================================
+   HERO SIDE NAV
+========================================================= */
+
+.hero-side-nav {
+    width: var(--side-nav-width);
+
+    height:
+        calc(
+            100vh
+            - var(--navbar-height)
+            - var(--hero-footer-height)
+        );
+
+    align-self: start;
+
+    padding: 0;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    background:
+        rgba(8, 16, 20, 0.32);
+
+    /*
+       Pas de border-right ici :
+       la ligne verticale unique est .hero-rail-left.
+       Ça évite le petit décalage de 1 px.
+    */
+
+    backdrop-filter:
+        blur(3px);
+
+    -webkit-backdrop-filter:
+        blur(3px);
+
+    opacity: 0;
+
+    animation:
+        heroReveal
+        0.8s
+        var(--ease)
+        2.7s
+        forwards;
+}
+
+
+/* =========================================================
+   HERO SIDE NAV LINKS
+========================================================= */
+
+.hero-side-nav a {
+    min-height: 92px;
+
+    padding:
+        18px
+        10px;
+
+    position: relative;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+    align-items: center;
+
+    gap: 7px;
+
+    text-align: center;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    color:
+        rgba(255, 255, 255, 0.72);
+
+    font-size: 0.62rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12em;
+
+    transition:
+        color 0.25s ease,
+        background 0.25s ease;
+}
+
+.hero-side-nav a:first-child {
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+}
+
+.hero-side-nav a span {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    line-height: 1;
+
+    color: var(--signal);
+}
+
+.hero-side-nav a::before {
+    content: "";
+
+    width: 3px;
+    height: 0;
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    background: var(--signal);
+
+    transform: translateY(-50%);
+
+    transition:
+        height
+        0.3s
+        var(--ease);
+}
+
+.hero-side-nav a:hover {
+    color: var(--white);
+
+    background:
+        rgba(255, 255, 255, 0.055);
+}
+
+.hero-side-nav a:hover::before {
+    height: 100%;
+}
+
+
+/* =========================================================
+   HERO CONTENT
+========================================================= */
+
+.hero-content {
+    align-self: end;
+
+    padding:
+        80px
+        6vw
+        145px;
+}
+
+
+/* =========================================================
+   HERO TOP LINE
+========================================================= */
+
+.hero-topline {
+    margin-bottom: 30px;
+
+    display: flex;
+
+    gap: 30px;
+
+    opacity: 0;
+
+    font-size: 0.52rem;
+    font-weight: 500;
+
+    letter-spacing: 0.13em;
+
+    animation:
+        heroReveal
+        0.8s
+        var(--ease)
+        2.65s
+        forwards;
+}
+
+.hero-topline span:not(:last-child)::after {
+    content: " / ";
+
+    margin-left: 30px;
+
+    color: var(--signal);
+}
+
+
+/* =========================================================
+   HERO TITLE
+========================================================= */
+
+.hero-title {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            5.8rem,
+            11vw,
+            11rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.72;
+
+    letter-spacing: -0.04em;
+
+    text-transform: uppercase;
+}
+
+.title-line {
+    display: block;
+
+    overflow: hidden;
+}
+
+.title-line > span {
+    display: block;
+
+    transform:
+        translateY(
+            110%
+        );
+
+    animation:
+        titleReveal
+        1.1s
+        var(--ease)
+        forwards;
+}
+
+.title-line:nth-child(1) > span {
+    animation-delay: 2.4s;
+}
+
+.title-line:nth-child(2) > span {
+    animation-delay: 2.55s;
+}
+
+.title-line:nth-child(3) > span {
+    animation-delay: 2.7s;
+}
+
+.title-line-outline {
+    color: transparent;
+
+    -webkit-text-stroke:
+        1.5px
+        rgba(255, 255, 255, 0.72);
+}
+
+
+/* =========================================================
+   HERO BOTTOM
+========================================================= */
+
+.hero-bottom {
+    margin-top: 55px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(
+            260px,
+            430px
+        )
+        auto;
+
+    align-items: end;
+
+    gap: 60px;
+
+    opacity: 0;
+
+    animation:
+        heroReveal
+        0.9s
+        var(--ease)
+        2.95s
+        forwards;
+}
+
+
+/* =========================================================
+   HERO DESCRIPTION
+========================================================= */
+
+.hero-description {
+    display: grid;
+
+    grid-template-columns:
+        50px
+        1fr;
+
+    align-items: start;
+
+    gap: 20px;
+}
+
+.hero-description-line {
+    width: 50px;
+    height: 3px;
+
+    margin-top: 8px;
+
+    background: var(--signal);
+}
+
+.hero-description p {
+    font-size: 0.78rem;
+
+    line-height: 1.8;
+
+    color:
+        rgba(255, 255, 255, 0.7);
+}
+
+
+/* =========================================================
+   HERO CTA
+========================================================= */
+
+.hero-cta {
+    min-width: 240px;
+    min-height: 58px;
+
+    padding:
+        0
+        22px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.42);
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.1em;
+
+    transition:
+        background 0.25s ease,
+        color 0.25s ease;
+}
+
+.hero-cta:hover {
+    background: var(--white);
+
+    color: var(--steel-deep);
+}
+
+.hero-cta-arrow {
+    font-size: 1rem;
+}
+
+/* =========================================================
+   COMPANY
+========================================================= */
+
+.company {
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        130px
+        6vw
+        150px;
+
+    background:
+        var(--concrete-light);
+
+    color:
+        var(--steel-deep);
+}
+
+
+/* =========================================================
+   COMPANY GRID
+========================================================= */
+
+.company-grid {
+    position: absolute;
+    inset: 0;
+
+    pointer-events: none;
+
+    opacity: 0.7;
+
+    background-image:
+        linear-gradient(
+            rgba(17, 27, 32, 0.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(17, 27, 32, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        80px
+        80px;
+}
+
+
+/* =========================================================
+   COMPANY HEADER
+========================================================= */
+
+.company-header {
+    position: relative;
+
+    z-index: 1;
+
+    display: grid;
+
+    grid-template-columns:
+        120px
+        minmax(0, 1.2fr)
+        minmax(280px, 0.65fr);
+
+    gap: 60px;
+
+    align-items: start;
+}
+
+
+/* =========================================================
+   COMPANY INDEX
+========================================================= */
+
+.company-index {
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 8px;
+}
+
+
+.company-index span {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2rem;
+    font-weight: 600;
+
+    color:
+        var(--signal);
+}
+
+
+.company-index p {
+    font-size: 0.54rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.15em;
+}
+
+
+/* =========================================================
+   COMPANY HEADING
+========================================================= */
+
+.company-kicker {
+    display: block;
+
+    margin-bottom: 28px;
+
+    font-size: 0.55rem;
+    font-weight: 600;
+
+    letter-spacing: 0.16em;
+
+    color:
+        rgba(17, 27, 32, 0.55);
+}
+
+
+.company-heading h2 {
+    max-width: 750px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            5rem,
+            8vw,
+            9rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.78;
+
+    letter-spacing: -0.035em;
+
+    text-transform: uppercase;
+}
+
+
+.company-heading h2 span {
+    display: block;
+
+    color: transparent;
+
+    -webkit-text-stroke:
+        1.5px
+        rgba(17, 27, 32, 0.55);
+}
+
+
+/* =========================================================
+   COMPANY INTRO
+========================================================= */
+
+.company-intro {
+    padding-top: 45px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    gap: 24px;
+}
+
+
+.company-intro p {
+    font-size: 0.82rem;
+
+    line-height: 1.9;
+
+    color:
+        rgba(17, 27, 32, 0.68);
+}
+
+
+/* =========================================================
+   COMPANY STATS
+========================================================= */
+
+.company-stats {
+    position: relative;
+
+    z-index: 1;
+
+    margin-top: 110px;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(4, 1fr);
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.2);
+
+    border-bottom:
+        1px solid
+        rgba(17, 27, 32, 0.2);
+}
+
+
+.company-stat {
+    min-height: 190px;
+
+    padding:
+        35px
+        30px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: space-between;
+
+    border-right:
+        1px solid
+        rgba(17, 27, 32, 0.16);
+}
+
+
+.company-stat:first-child {
+    border-left:
+        1px solid
+        rgba(17, 27, 32, 0.16);
+}
+
+
+.stat-value {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            3.8rem,
+            5vw,
+            6rem
+        );
+
+    font-weight: 600;
+
+    line-height: 1;
+
+    color:
+        var(--signal);
+}
+
+
+.stat-label {
+    font-size: 0.55rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.14em;
+
+    color:
+        rgba(17, 27, 32, 0.62);
+}
+
+
+/* =========================================================
+   HISTORY
+========================================================= */
+
+.history {
+    position: relative;
+
+    z-index: 1;
+
+    margin-top: 150px;
+}
+
+
+.history-heading {
+    margin-bottom: 70px;
+
+    display: flex;
+
+    align-items: center;
+
+    justify-content: space-between;
+}
+
+
+.history-heading span {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 3rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+}
+
+
+.history-heading p {
+    font-size: 0.55rem;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.14em;
+
+    color:
+        rgba(17, 27, 32, 0.5);
+}
+
+
+/* =========================================================
+   HISTORY LINE
+========================================================= */
+
+.history-line {
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        repeat(7, minmax(180px, 1fr));
+
+    overflow-x: auto;
+
+    scrollbar-width: none;
+}
+
+
+.history-line::-webkit-scrollbar {
+    display: none;
+}
+
+
+.history-line::before {
+    content: "";
+
+    position: absolute;
+
+    top: 61px;
+    left: 0;
+    right: 0;
+
+    height: 1px;
+
+    background:
+        rgba(17, 27, 32, 0.25);
+}
+
+
+/* =========================================================
+   HISTORY ITEM
+========================================================= */
+
+.history-item {
+    min-width: 180px;
+
+    position: relative;
+
+    padding-right: 30px;
+}
+
+
+.history-year {
+    display: block;
+
+    margin-bottom: 27px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2.3rem;
+    font-weight: 600;
+
+    line-height: 1;
+
+    transition:
+        color
+        0.3s ease;
+}
+
+
+.history-point {
+    width: 11px;
+    height: 11px;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: block;
+
+    margin-bottom: 35px;
+
+    border:
+        2px solid
+        var(--signal);
+
+    background:
+        var(--concrete-light);
+
+    transform:
+        rotate(
+            45deg
+        );
+
+    transition:
+        background 0.3s ease,
+        transform 0.3s var(--ease);
+}
+
+
+/* =========================================================
+   HISTORY CONTENT
+========================================================= */
+
+.history-content {
+    padding-top: 5px;
+}
+
+
+.history-number {
+    display: block;
+
+    margin-bottom: 14px;
+
+    font-size: 0.48rem;
+
+    letter-spacing: 0.12em;
+
+    color:
+        var(--signal);
+}
+
+
+.history-content h3 {
+    margin-bottom: 15px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.25rem;
+    font-weight: 600;
+
+    line-height: 1;
+
+    text-transform: uppercase;
+}
+
+
+.history-content p {
+    max-width: 190px;
+
+    font-size: 0.67rem;
+
+    line-height: 1.7;
+
+    color:
+        rgba(17, 27, 32, 0.62);
+}
+
+
+/* =========================================================
+   HISTORY HOVER
+========================================================= */
+
+.history-item:hover
+.history-year {
+    color:
+        var(--signal);
+}
+
+
+.history-item:hover
+.history-point {
+    background:
+        var(--signal);
+
+    transform:
+        rotate(
+            45deg
+        )
+        scale(
+            1.35
+        );
+}
+
+
+/* =========================================================
+   COMPANY TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .company {
+        padding:
+            110px
+            6vw;
+    }
+
+
+    .company-header {
+        grid-template-columns:
+            90px
+            1fr;
+
+        gap: 40px;
+    }
+
+
+    .company-intro {
+        grid-column:
+            2;
+
+        max-width: 580px;
+
+        padding-top: 0;
+    }
+
+
+    .company-stats {
+        grid-template-columns:
+            repeat(2, 1fr);
+    }
+
+
+    .company-stat:nth-child(2) {
+        border-right: 0;
+    }
+
+
+    .history {
+        margin-top: 110px;
+    }
+
+}
+
+
+/* =========================================================
+   COMPANY MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .company {
+        padding:
+            85px
+            6%
+            100px;
+    }
+
+
+    .company-header {
+        display: block;
+    }
+
+
+    .company-index {
+        margin-bottom: 45px;
+    }
+
+
+    .company-heading h2 {
+        font-size:
+            clamp(
+                4.2rem,
+                18vw,
+                6.2rem
+            );
+    }
+
+
+    .company-intro {
+        margin-top: 45px;
+
+        padding: 0;
+    }
+
+
+    .company-stats {
+        margin-top: 75px;
+
+        grid-template-columns:
+            1fr
+            1fr;
+    }
+
+
+    .company-stat {
+        min-height: 145px;
+
+        padding:
+            25px
+            18px;
+    }
+
+
+    .stat-value {
+        font-size: 3.2rem;
+    }
+
+
+    .history {
+        margin-top: 90px;
+    }
+
+
+    .history-heading {
+        margin-bottom: 50px;
+
+        display: block;
+    }
+
+
+    .history-heading p {
+        margin-top: 10px;
+    }
+
+
+    .history-line {
+        grid-template-columns:
+            repeat(7, 210px);
+    }
+
+}
+
+/* =========================================================
+   PROJECT ASIDE
+========================================================= */
+
+.hero-project {
+    position: relative;
+
+    /*
+       Fallback vh + dvh moderne.
+       La fiche s'arrête juste au-dessus du footer du hero.
+    */
+    height:
+        calc(
+            100vh
+            - var(--navbar-height)
+            - var(--hero-footer-height)
+        );
+
+    height:
+        calc(
+            100dvh
+            - var(--navbar-height)
+            - var(--hero-footer-height)
+        );
+
+    min-height: 0;
+
+    align-self: start;
+
+    overflow: hidden;
+
+    display: grid;
+
+    /*
+       1 = infos
+       2 = image flexible
+       3 = bouton toujours visible
+    */
+    grid-template-rows:
+        auto
+        minmax(0, 1fr)
+        58px;
+
+    background:
+        rgba(8, 16, 20, 0.92);
+
+    opacity: 0;
+
+    animation:
+        heroReveal
+        0.9s
+        var(--ease)
+        2.85s
+        forwards;
+}
+
+
+/* =========================================================
+   PROJECT CONTENT
+========================================================= */
+
+.hero-project-content {
+    min-height: 0;
+
+    padding:
+        30px
+        28px
+        24px;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: flex;
+    flex-direction: column;
+}
+
+
+.project-label {
+    display: block;
+
+    margin-bottom: 16px;
+
+    font-size: 0.48rem;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.14em;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.48
+        );
+}
+
+
+.project-number {
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 3.7rem;
+    font-weight: 600;
+
+    line-height: 0.95;
+
+    letter-spacing: -0.03em;
+
+    color:
+        var(--signal);
+}
+
+
+.project-separator {
+    width: 100%;
+    height: 1px;
+
+    margin:
+        22px
+        0;
+
+    background:
+        var(--line-light);
+}
+
+
+.hero-project h2 {
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 2rem;
+    font-weight: 600;
+
+    line-height: 0.82;
+
+    text-transform: uppercase;
+
+    color:
+        var(--white);
+}
+
+
+.project-meta {
+    margin-top: 26px;
+
+    display: flex;
+    justify-content: space-between;
+
+    gap: 16px;
+
+    font-size: 0.48rem;
+    font-weight: 500;
+
+    text-transform: uppercase;
+    letter-spacing: 0.11em;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.5
+        );
+}
+
+
+/* =========================================================
+   PROJECT IMAGE
+========================================================= */
+
+.hero-project-bg {
+    width: 100%;
+    min-height: 0;
+
+    position: relative;
+
+    overflow: hidden;
+
+    margin: 0;
+    padding: 0;
+
+    background:
+        rgba(8, 16, 20, 0.96);
+}
+
+
+.project-image-slider {
+    position: absolute;
+    inset: 0;
+
+    width: 100%;
+    height: 100%;
+
+    overflow: hidden;
+}
+
+
+.project-image-slider img {
+    width: 100%;
+    height: 100%;
+
+    display: block;
+
+    object-fit: cover;
+    object-position: center;
+
+    filter:
+        brightness(0.68)
+        saturate(0.8)
+        contrast(1.05);
+
+    transform:
+        scale(
+            1
+        );
+
+    transition:
+        transform
+        0.8s
+        var(--ease);
+}
+
+
+.hero-project:hover
+.project-image-slider img {
+    transform:
+        scale(
+            1.04
+        );
+}
+
+
+/* =========================================================
+   PROJECT LINK — SOUS L'IMAGE
+========================================================= */
+
+.project-link {
+    width: 100%;
+    height: 58px;
+
+    min-height: 58px;
+
+    margin: 0;
+    padding:
+        0
+        28px;
+
+    display: flex;
+
+    align-items: center;
+    justify-content: space-between;
+
+    gap: 20px;
+
+    background:
+        var(--signal);
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.14
+        );
+
+    color:
+        var(--white);
+
+    font-size: 0.52rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+    letter-spacing: 0.12em;
+
+    transition:
+        background
+        0.3s ease,
+        padding-left
+        0.3s
+        var(--ease);
+}
+
+
+.project-link span:last-child {
+    font-size: 0.9rem;
+
+    transition:
+        transform
+        0.3s
+        var(--ease);
+}
+
+
+.project-link:hover {
+    padding-left: 32px;
+
+    background:
+        var(--signal-dark);
+}
+
+
+.project-link:hover
+span:last-child {
+    transform:
+        translate(
+            3px,
+            -3px
+        );
+}
+
+
+/* =========================================================
+   RESPONSIVE EN HAUTEUR — DESKTOP
+========================================================= */
+
+/*
+   Quand DevTools est ouvert en bas ou sur un écran peu haut,
+   on compacte les infos au lieu de faire disparaître
+   l'image ou le bouton.
+*/
+
+@media (min-width: 1051px) and (max-height: 780px) {
+
+    .hero-project {
+        grid-template-rows:
+            auto
+            minmax(0, 1fr)
+            50px;
+    }
+
+    .hero-project-content {
+        padding:
+            18px
+            22px
+            14px;
+    }
+
+    .project-label {
+        margin-bottom: 8px;
+
+        font-size: 0.42rem;
+    }
+
+    .project-number {
+        font-size: 3rem;
+    }
+
+    .project-separator {
+        margin:
+            13px
+            0;
+    }
+
+    .hero-project h2 {
+        font-size: 1.65rem;
+    }
+
+    .project-meta {
+        margin-top: 13px;
+
+        font-size: 0.43rem;
+    }
+
+    .project-link {
+        height: 50px;
+        min-height: 50px;
+
+        padding:
+            0
+            22px;
+    }
+}
+
+
+@media (min-width: 1051px) and (max-height: 620px) {
+
+    .hero-project {
+        grid-template-rows:
+            auto
+            minmax(0, 1fr)
+            44px;
+    }
+
+    .hero-project-content {
+        padding:
+            12px
+            18px
+            10px;
+    }
+
+    .project-label {
+        margin-bottom: 5px;
+
+        font-size: 0.38rem;
+    }
+
+    .project-number {
+        font-size: 2.5rem;
+    }
+
+    .project-separator {
+        margin:
+            9px
+            0;
+    }
+
+    .hero-project h2 {
+        font-size: 1.4rem;
+        line-height: 0.86;
+    }
+
+    .project-meta {
+        margin-top: 9px;
+
+        font-size: 0.38rem;
+    }
+
+    .project-link {
+        height: 44px;
+        min-height: 44px;
+
+        padding:
+            0
+            18px;
+
+        font-size: 0.46rem;
+    }
+}
+
+
+/* =========================================================
+   HERO FOOTER
+========================================================= */
+
+.hero-footer-line {
+    min-height: var(--hero-footer-height);
+
+    position: absolute;
+
+    left: var(--side-nav-width);
+    right: 0;
+    bottom: 0;
+
+    z-index: 8;
+
+    padding:
+        0
+        28px;
+
+    display: grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        1fr;
+
+    align-items: center;
+
+    border-top:
+        1px solid
+        var(--line-light);
+
+    font-size: 0.46rem;
+
+    letter-spacing: 0.12em;
+
+    opacity: 0;
+
+    animation:
+        heroReveal
+        0.7s
+        ease
+        3.1s
+        forwards;
+}
+
+.hero-footer-center {
+    text-align: center;
+}
+
+.hero-footer-line span:last-child {
+    text-align: right;
+}
+
+
+/* =========================================================
+   HERO KEYFRAMES
+========================================================= */
+
+@keyframes heroVideoReveal {
+    to {
+        opacity: 1;
+
+        transform:
+            scale(
+                1
+            );
+    }
+}
+
+@keyframes heroReveal {
+    from {
+        opacity: 0;
+
+        transform:
+            translateY(
+                18px
+            );
+    }
+
+    to {
+        opacity: 1;
+
+        transform:
+            translateY(
+                0
+            );
+    }
+}
+
+@keyframes titleReveal {
+    to {
+        transform:
+            translateY(
+                0
+            );
+    }
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    :root {
+        --side-nav-width: 125px;
+    }
+
+    .logo-meta {
+        display: none;
+    }
+
+    .navbar-left {
+        padding:
+            0
+            25px;
+    }
+
+    .hero-layout {
+        grid-template-columns:
+            var(--side-nav-width)
+            1fr;
+    }
+
+    .hero-project {
+        display: none;
+    }
+
+    .hero-rail-right {
+        display: none;
+    }
+
+    .hero-side-nav a {
+        min-height: 82px;
+
+        padding:
+            15px
+            8px;
+
+        font-size: 0.54rem;
+    }
+
+    .hero-side-nav a span {
+        font-size: 1.05rem;
+    }
+
+    .hero-content {
+        padding-left: 5vw;
+        padding-right: 5vw;
+    }
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    :root {
+        --navbar-height: 72px;
+        --side-nav-width: 0px;
+    }
+
+    .navbar {
+        min-height:
+            var(--navbar-height);
+    }
+
+    .navbar-left {
+        min-width: 0;
+
+        padding:
+            0
+            20px;
+    }
+
+    .logo {
+        width: 125px;
+    }
+
+    .nav-contact {
+        min-width: 105px;
+
+        padding:
+            0
+            18px;
+    }
+
+    .hero-layout {
+        display: block;
+
+        padding-top:
+            var(--navbar-height);
+    }
+
+    .hero-side-nav,
+    .hero-rail {
+        display: none;
+    }
+
+    .hero-content {
+        min-height:
+            calc(
+                100dvh
+                - var(--navbar-height)
+            );
+    
+        padding:
+            70px
+            6%
+            90px;
+    
+        display: flex;
+    
+        flex-direction: column;
+    
+        justify-content: center;
+    }
+
+    .hero-topline {
+        flex-wrap: wrap;
+
+        gap:
+            7px
+            12px;
+    }
+
+    .hero-topline span:not(:last-child)::after {
+        margin-left: 12px;
+    }
+
+    .hero-title {
+        width: 100%;
+    
+        font-size:
+            clamp(
+                3.8rem,
+                19vw,
+                6rem
+            );
+    
+        line-height: 0.76;
+    
+        letter-spacing: -0.045em;
+    }
+
+    .hero-title .title-line {
+        width: 100%;
+    }
+
+    .hero-bottom {
+        grid-template-columns:
+            1fr;
+
+        gap: 30px;
+
+        margin-top: 40px;
+    }
+
+    .hero-cta {
+        width: 100%;
+    }
+
+    .hero-footer-line {
+        left: 0;
+
+        padding:
+            0
+            6%;
+
+        grid-template-columns:
+            1fr
+            auto;
+    }
+
+    .hero-footer-center {
+        display: none;
+    }
+
+    .opening-top {
+        width:
+            calc(
+                100% - 60px
+            );
+
+        top: 25px;
+    }
+
+    .opening-content {
+        width: 88%;
+    }
+
+    .opening-logo {
+        width:
+            clamp(
+                220px,
+                65vw,
+                380px
+            );
+    }
+
+    .opening-meta {
+        font-size: 0.65rem;
+    }
+
+    .opening-coordinates {
+        left: 25px;
+        bottom: 30px;
+    }
+}
+
+
+/* =========================================================
+   TOUCH
+========================================================= */
+
+@media (pointer: coarse) {
+
+    body::before {
+        display: none;
+    }
+}
+
+
+/* =========================================================
+   ACCESSIBILITY
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .opening {
+        display: none;
+    }
+
+    .navbar,
+    .hero-media video,
+    .hero-side-nav,
+    .hero-topline,
+    .title-line > span,
+    .hero-bottom,
+    .hero-project,
+    .hero-footer-line {
+        opacity: 1;
+
+        transform: none;
+
+        animation: none;
+    }
+}
+
+/* =========================================================
+   RESPONSIVE — ÉCRANS PEU HAUTS / DEVTOOLS
+========================================================= */
+
+@media (min-width: 1051px) and (max-height: 700px) {
+
+    /* HERO */
+
+    .hero {
+        height: 100dvh;
+        min-height: 0;
+    }
+
+
+    .hero-layout {
+        height: 100dvh;
+        min-height: 0;
+
+        padding-top:
+            var(--navbar-height);
+    }
+
+
+    /* NAVIGATION GAUCHE */
+
+    .hero-side-nav {
+        height:
+            calc(
+                100dvh
+                - var(--navbar-height)
+                - var(--hero-footer-height)
+            );
+
+        justify-content: center;
+    }
+
+
+    .hero-side-nav a {
+        min-height: 62px;
+
+        padding:
+            8px
+            10px;
+
+        gap: 4px;
+
+        font-size: 0.48rem;
+    }
+
+
+    .hero-side-nav a span {
+        font-size: 1rem;
+    }
+
+
+    /* CONTENU CENTRAL */
+
+    .hero-content {
+        padding:
+            20px
+            6vw
+            58px;
+    }
+
+
+    .hero-topline {
+        margin-bottom: 14px;
+    }
+
+
+    .hero-title {
+        font-size:
+            clamp(
+                4rem,
+                9vw,
+                7.2rem
+            );
+
+        line-height: 0.72;
+    }
+
+
+    .hero-bottom {
+        margin-top: 25px;
+
+        gap: 30px;
+    }
+
+
+    /* FICHE PROJET */
+
+    .hero-project {
+        height:
+            calc(
+                100dvh
+                - var(--navbar-height)
+                - var(--hero-footer-height)
+            );
+
+        grid-template-rows:
+            auto
+            minmax(90px, 1fr)
+            44px;
+    }
+
+
+    .hero-project-content {
+        padding:
+            12px
+            18px
+            10px;
+    }
+
+
+    .project-label {
+        margin-bottom: 5px;
+
+        font-size: 0.38rem;
+    }
+
+
+    .project-number {
+        font-size: 2.45rem;
+    }
+
+
+    .project-separator {
+        margin:
+            8px
+            0;
+    }
+
+
+    .hero-project h2 {
+        font-size: 1.35rem;
+
+        line-height: 0.85;
+    }
+
+
+    .project-meta {
+        margin-top: 8px;
+
+        font-size: 0.37rem;
+    }
+
+
+    .project-link {
+        height: 44px;
+        min-height: 44px;
+
+        padding:
+            0
+            18px;
+
+        font-size: 0.44rem;
+    }
+
+}
+
+@media (min-width: 1051px) and (max-height: 520px) {
+
+    .hero-title {
+        font-size:
+            clamp(
+                3.3rem,
+                7.5vw,
+                5.5rem
+            );
+    }
+
+
+    .hero-content {
+        padding-bottom: 48px;
+    }
+
+
+    .hero-side-nav a {
+        min-height: 50px;
+    }
+
+
+    .hero-project-content {
+        padding:
+            8px
+            16px;
+    }
+
+
+    .project-label {
+        display: none;
+    }
+
+
+    .project-number {
+        font-size: 2rem;
+    }
+
+
+    .project-separator {
+        margin:
+            5px
+            0;
+    }
+
+
+    .hero-project h2 {
+        font-size: 1.1rem;
+    }
+
+
+    .project-meta {
+        margin-top: 5px;
+    }
+
+}
+
+/* =========================================================
+   NAVBAR — GLOBAL
+========================================================= */
+
+.navbar {
+    width: 100%;
+    height: var(--navbar-height);
+
+    position: fixed;
+
+    top: 0;
+    left: 0;
+
+    z-index: 100;
+
+    display: flex;
+
+    align-items: stretch;
+    justify-content: space-between;
+
+    background:
+        rgba(
+            17,
+            27,
+            32,
+            0.12
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.14
+        );
+
+    transition:
+        background
+        0.45s
+        var(--ease),
+        border-color
+        0.45s
+        var(--ease),
+        backdrop-filter
+        0.45s
+        var(--ease);
+}
+
+
+/* =========================================================
+   NAVBAR — APRÈS LE HERO
+========================================================= */
+
+.navbar.is-past-hero {
+    background:
+        rgba(
+            17,
+            27,
+            32,
+            0.96
+        );
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.12
+        );
+
+    backdrop-filter:
+        blur(
+            14px
+        );
+
+    -webkit-backdrop-filter:
+        blur(
+            14px
+        );
+}
+
+
+/* =========================================================
+   NAVBAR LEFT
+========================================================= */
+
+.navbar-left {
+    height: 100%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 24px;
+
+    padding-left: 30px;
+}
+
+
+.navbar-left .logo {
+    display: flex;
+
+    align-items: center;
+}
+
+
+.navbar-left .logo img {
+    display: block;
+}
+
+
+.logo-meta {
+    white-space: nowrap;
+}
+
+
+/* =========================================================
+   NAVBAR MAIN NAV
+========================================================= */
+
+.navbar-main-nav {
+    height: 100%;
+
+    position: absolute;
+
+    top: 0;
+    left: 50%;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: clamp(
+        22px,
+        2.4vw,
+        48px
+    );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    pointer-events: none;
+
+    transform:
+        translate(
+            -50%,
+            -12px
+        );
+
+    transition:
+        opacity
+        0.4s
+        var(--ease),
+        transform
+        0.4s
+        var(--ease),
+        visibility
+        0.4s;
+}
+
+
+/* APPARITION APRÈS HERO */
+
+.navbar.is-past-hero
+.navbar-main-nav {
+    opacity: 1;
+
+    visibility: visible;
+
+    pointer-events: auto;
+
+    transform:
+        translate(
+            -50%,
+            0
+        );
+}
+
+
+/* =========================================================
+   NAVBAR LINKS
+========================================================= */
+
+.navbar-main-nav a {
+    height: 100%;
+
+    position: relative;
+
+    display: flex;
+
+    align-items: center;
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.64
+        );
+
+    font-size: 0.54rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12em;
+
+    white-space: nowrap;
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.navbar-main-nav a::after {
+    content: "";
+
+    width: 0;
+    height: 2px;
+
+    position: absolute;
+
+    left: 0;
+    bottom: 0;
+
+    background:
+        var(--signal);
+
+    transition:
+        width
+        0.35s
+        var(--ease);
+}
+
+
+.navbar-main-nav a:hover {
+    color:
+        var(--white);
+}
+
+
+.navbar-main-nav a:hover::after {
+    width: 100%;
+}
+
+
+/* SECTION ACTIVE */
+
+.navbar-main-nav a.is-active {
+    color:
+        var(--white);
+}
+
+
+.navbar-main-nav a.is-active::after {
+    width: 100%;
+}
+
+
+/* =========================================================
+   NAVBAR ACTIONS
+========================================================= */
+
+.navbar-actions {
+    height: 100%;
+
+    margin-left: auto;
+
+    display: flex;
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   CONTACT
+========================================================= */
+
+.nav-contact {
+    width:
+        var(--project-width);
+
+    min-width:
+        var(--project-width);
+
+    height: 100%;
+
+    padding:
+        0
+        30px;
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 25px;
+
+    background:
+        var(--signal);
+
+    color:
+        var(--white);
+
+    font-size: 0.57rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.1em;
+
+    transition:
+        background
+        0.3s
+        ease;
+}
+
+
+.nav-contact:hover {
+    background:
+        var(--signal-dark);
+}
+
+
+/* =========================================================
+   BURGER
+========================================================= */
+
+.navbar-burger {
+    width: 72px;
+    height: 100%;
+
+    padding: 0;
+
+    display: none;
+
+    position: relative;
+
+    border: 0;
+
+    background:
+        transparent;
+
+    cursor: pointer;
+}
+
+
+.navbar-burger span {
+    width: 22px;
+    height: 1px;
+
+    position: absolute;
+
+    left: 50%;
+
+    background:
+        var(--white);
+
+    transform:
+        translateX(
+            -50%
+        );
+
+    transition:
+        transform
+        0.35s
+        var(--ease),
+        top
+        0.35s
+        var(--ease);
+}
+
+
+.navbar-burger span:first-child {
+    top:
+        calc(
+            50%
+            - 4px
+        );
+}
+
+
+.navbar-burger span:last-child {
+    top:
+        calc(
+            50%
+            + 4px
+        );
+}
+
+
+/* BURGER OUVERT */
+
+.navbar-burger.is-open
+span:first-child {
+    top: 50%;
+
+    transform:
+        translateX(
+            -50%
+        )
+        rotate(
+            45deg
+        );
+}
+
+
+.navbar-burger.is-open
+span:last-child {
+    top: 50%;
+
+    transform:
+        translateX(
+            -50%
+        )
+        rotate(
+            -45deg
+        );
+}
+
+
+/* =========================================================
+   MOBILE NAV
+========================================================= */
+
+.mobile-nav {
+    position: fixed;
+
+    top:
+        var(--navbar-height);
+
+    left: 0;
+
+    width: 100%;
+
+    z-index: 95;
+
+    display: none;
+
+    background:
+        var(--steel-deep);
+
+    border-top:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.1
+        );
+
+    transform:
+        translateY(
+            -20px
+        );
+
+    opacity: 0;
+
+    visibility: hidden;
+
+    transition:
+        transform
+        0.4s
+        var(--ease),
+        opacity
+        0.35s
+        ease,
+        visibility
+        0.35s;
+}
+
+
+.mobile-nav.is-open {
+    transform:
+        translateY(
+            0
+        );
+
+    opacity: 1;
+
+    visibility: visible;
+}
+
+
+.mobile-nav a {
+    min-height: 66px;
+
+    padding:
+        0
+        6vw;
+
+    display: flex;
+
+    align-items: center;
+
+    gap: 18px;
+
+    border-bottom:
+        1px solid
+        rgba(
+            255,
+            255,
+            255,
+            0.09
+        );
+
+    color:
+        rgba(
+            255,
+            255,
+            255,
+            0.72
+        );
+
+    font-size: 0.62rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.12em;
+}
+
+.mobile-nav-contact {
+    margin-top: auto;
+
+    position: relative;
+
+    background:
+        var(--signal);
+
+    color:
+        var(--white);
+
+    border-top:
+        0;
+}
+
+
+.mobile-nav-contact:hover {
+    background:
+        var(--signal-dark);
+}
+
+
+.mobile-nav-contact-arrow {
+    margin-left: auto;
+
+    font-size: 1rem;
+
+    color:
+        var(--white);
+}
+
+
+.mobile-nav a span {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.2rem;
+
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   NAVBAR RESPONSIVE
+========================================================= */
+
+@media (max-width: 1250px) {
+
+    .navbar-main-nav {
+        gap: 20px;
+    }
+
+
+    .navbar-main-nav a {
+        font-size: 0.48rem;
+    }
+
+}
+
+
+
+@media (max-width: 1050px) {
+
+    .navbar-main-nav {
+        display: none;
+    }
+
+
+    .navbar-burger {
+        display: block;
+    }
+
+
+    .mobile-nav {
+        display: block;
+    }
+
+
+    .nav-contact {
+        width: 150px;
+
+        min-width: 150px;
+
+        padding:
+            0
+            22px;
+    }
+
+    .nav-contact {
+        display: none;
+    }
+}
+
+
+
+@media (max-width: 650px) {
+
+    .navbar {
+        height:
+            var(--navbar-height);
+    }
+
+
+    .navbar-left {
+        padding-left: 20px;
+
+        gap: 12px;
+    }
+
+
+    .logo-meta {
+        display: none;
+    }
+
+
+    .navbar-burger {
+        width: 58px;
+    }
+
+
+    .nav-contact {
+        width: 112px;
+
+        min-width: 112px;
+
+        padding:
+            0
+            16px;
+
+        font-size: 0.5rem;
+    }
+
+
+    .mobile-nav a {
+        min-height: 62px;
+
+        padding:
+            0
+            22px;
+    }
+
+}
+
+/* =========================================================
+   COMPANY PRESENTATION — LIGHT
+========================================================= */
+
+.company-presentation {
+    position: relative;
+
+    overflow: hidden;
+
+    padding:
+        120px
+        0
+        120px;
+
+    background:
+        var(--concrete-light);
+
+    color:
+        var(--steel-deep);
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.14);
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — TECHNICAL GRID
+========================================================= */
+
+.company-presentation .section-grid {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(17, 27, 32, 0.055) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(17, 27, 32, 0.055) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        90px
+        90px;
+
+    opacity: 0.72;
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — LAYOUT
+========================================================= */
+
+.company-presentation-inner {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0
+        auto;
+
+    position: relative;
+
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        150px
+        minmax(0, 1fr);
+
+    gap: 48px;
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — SIDE INDEX
+========================================================= */
+
+.company-presentation-side {
+    padding-top: 6px;
+
+    display: flex;
+
+    flex-direction: column;
+
+    align-items: flex-start;
+}
+
+
+.company-presentation-side::after {
+    content: "";
+
+    width: 34px;
+    height: 3px;
+
+    margin-top: 16px;
+
+    background:
+        var(--signal);
+}
+
+
+.company-presentation-side .section-number {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 3.25rem;
+    font-weight: 700;
+
+    line-height: 0.9;
+
+    color:
+        var(--signal);
+}
+
+
+.company-presentation-side .section-label {
+    margin-top: 16px;
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.15em;
+
+    color:
+        var(--steel-deep);
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — CONTENT
+========================================================= */
+
+.company-presentation-content {
+    min-width: 0;
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — HEADER
+========================================================= */
+
+.company-presentation-head {
+    max-width: 1080px;
+
+    margin-bottom: 62px;
+}
+
+
+.company-presentation-head::before {
+    content: "ENTREPRISE FAMILIALE · DEPUIS 1969";
+
+    display: block;
+
+    margin-bottom: 22px;
+
+    font-size: 0.52rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.16em;
+
+    color:
+        rgba(17, 27, 32, 0.48);
+}
+
+
+.company-presentation-head h2 {
+    max-width: 1100px;
+
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            3.6rem,
+            5.4vw,
+            5.8rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.92;
+
+    letter-spacing: -0.025em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.company-presentation-head h2::after {
+    content: "";
+
+    width: 46px;
+    height: 3px;
+
+    display: block;
+
+    margin:
+        24px
+        0
+        20px;
+
+    background:
+        var(--signal);
+}
+
+
+.company-presentation-subtitle {
+    max-width: 760px;
+
+    margin: 0;
+
+    font-size:
+        clamp(
+            1rem,
+            1.3vw,
+            1.35rem
+        );
+
+    font-weight: 400;
+
+    line-height: 1.55;
+
+    color:
+        rgba(17, 27, 32, 0.68);
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — BODY
+========================================================= */
+
+.company-presentation-body {
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.05fr)
+        minmax(380px, 0.95fr);
+
+    gap:
+        clamp(
+            45px,
+            5vw,
+            80px
+        );
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — IMAGE
+========================================================= */
+
+.company-presentation-image {
+    min-height: 500px;
+
+    position: relative;
+
+    overflow: hidden;
+
+    background:
+        var(--concrete);
+
+    border:
+        1px solid
+        rgba(17, 27, 32, 0.16);
+}
+
+
+.company-presentation-image::before {
+    content: "ROURISSOL / TERRAIN";
+
+    position: absolute;
+
+    top: 18px;
+    left: 20px;
+
+    z-index: 2;
+
+    padding:
+        7px
+        10px;
+
+    background:
+        rgba(17, 27, 32, 0.86);
+
+    color:
+        var(--white);
+
+    font-size: 0.43rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.13em;
+}
+
+
+.company-presentation-image::after {
+    content: "";
+
+    width: 42px;
+    height: 3px;
+
+    position: absolute;
+
+    right: 20px;
+    bottom: 20px;
+
+    z-index: 2;
+
+    background:
+        var(--signal);
+}
+
+
+.company-presentation-image img {
+    width: 100%;
+    height: 100%;
+
+    min-height: 500px;
+
+    display: block;
+
+    object-fit: cover;
+
+    filter:
+        saturate(0.88)
+        contrast(1.02);
+
+    transition:
+        transform
+        0.9s
+        var(--ease),
+        filter
+        0.6s
+        ease;
+}
+
+
+.company-presentation-image:hover img {
+    transform:
+        scale(
+            1.025
+        );
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — TEXT
+========================================================= */
+
+.company-presentation-text {
+    display: flex;
+
+    flex-direction: column;
+
+    justify-content: center;
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.18);
+}
+
+
+.company-presentation-text p {
+    margin: 0;
+
+    padding:
+        20px
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(17, 27, 32, 0.13);
+
+    font-size: 0.82rem;
+
+    line-height: 1.8;
+
+    color:
+        rgba(17, 27, 32, 0.7);
+}
+
+
+.company-presentation-text p:first-child {
+    padding-top: 26px;
+}
+
+
+.company-presentation-text p:last-child {
+    padding-bottom: 26px;
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .company-presentation {
+        padding:
+            100px
+            0;
+    }
+
+
+    .company-presentation-inner {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+
+        grid-template-columns:
+            100px
+            minmax(0, 1fr);
+
+        gap: 32px;
+    }
+
+
+    .company-presentation-head {
+        margin-bottom: 48px;
+    }
+
+
+    .company-presentation-body {
+        grid-template-columns:
+            1fr;
+
+        gap: 34px;
+    }
+
+
+    .company-presentation-image,
+    .company-presentation-image img {
+        min-height: 440px;
+    }
+
+
+    .company-presentation-text {
+        max-width: 760px;
+    }
+
+}
+
+
+/* =========================================================
+   COMPANY PRESENTATION — MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .company-presentation {
+        padding:
+            75px
+            0
+            85px;
+    }
+
+
+    .company-presentation-inner {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        display: block;
+    }
+
+
+    .company-presentation-side {
+        margin-bottom: 42px;
+
+        padding: 0;
+
+        flex-direction: row;
+
+        align-items: baseline;
+
+        gap: 14px;
+    }
+
+
+    .company-presentation-side::after {
+        display: none;
+    }
+
+
+    .company-presentation-side .section-number {
+        font-size: 2.5rem;
+    }
+
+
+    .company-presentation-side .section-label {
+        margin: 0;
+
+        font-size: 0.52rem;
+    }
+
+
+    .company-presentation-head {
+        margin-bottom: 40px;
+    }
+
+
+    .company-presentation-head::before {
+        margin-bottom: 16px;
+
+        font-size: 0.44rem;
+    }
+
+
+    .company-presentation-head h2 {
+        font-size:
+            clamp(
+                3rem,
+                14vw,
+                4.5rem
+            );
+    }
+
+
+    .company-presentation-head h2::after {
+        margin:
+            18px
+            0;
+    }
+
+
+    .company-presentation-subtitle {
+        font-size: 1rem;
+
+        line-height: 1.55;
+    }
+
+
+    .company-presentation-body {
+        display: block;
+    }
+
+
+    .company-presentation-image {
+        min-height: 310px;
+
+        margin-bottom: 30px;
+    }
+
+
+    .company-presentation-image img {
+        min-height: 310px;
+    }
+
+
+    .company-presentation-image::before {
+        top: 12px;
+        left: 12px;
+
+        padding:
+            6px
+            8px;
+    }
+
+
+    .company-presentation-image::after {
+        right: 12px;
+        bottom: 12px;
+    }
+
+
+    .company-presentation-text p {
+        padding:
+            18px
+            0;
+
+        font-size: 0.78rem;
+
+        line-height: 1.75;
+    }
+
+}
