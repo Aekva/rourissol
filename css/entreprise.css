@@ -1,0 +1,1760 @@
+/* =========================================================
+   ROURISSOL — PAGE ENTREPRISE
+   HERO INTERNE
+========================================================= */
+
+/* =========================================================
+   NAVBAR — PAGE INTERNE
+   affichage immédiat
+========================================================= */
+
+/*
+   Sur les pages internes la navbar ne dépend pas du scroll
+   du Hero : elle est rendue immédiatement, sans transition.
+   Le fond reste volontairement plein afin d'éviter le coût
+   du backdrop-filter au premier affichage dans Safari.
+*/
+
+.page-entreprise .navbar {
+    opacity: 1;
+    visibility: visible;
+
+    background:
+        var(--steel-deep);
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+
+    transition: none !important;
+    animation: none !important;
+}
+
+
+.page-entreprise .navbar-left,
+.page-entreprise .navbar-actions {
+    opacity: 1;
+    visibility: visible;
+}
+
+
+/*
+   La navigation horizontale n'est forcée visible que sur
+   desktop. En dessous de 1050px, style.css garde la logique
+   burger / menu mobile.
+*/
+
+@media (min-width: 1051px) {
+
+    .page-entreprise .navbar-main-nav {
+        opacity: 1 !important;
+        visibility: visible !important;
+        pointer-events: auto !important;
+
+        transform:
+            translate(-50%, 0) !important;
+
+        transition: none !important;
+        animation: none !important;
+    }
+
+}
+
+/* =========================================================
+   PAGE
+========================================================= */
+
+.page-entreprise {
+    background:
+        var(--concrete-light);
+}
+
+
+.page-entreprise main {
+    padding-top:
+        var(--navbar-height);
+}
+
+
+/* =========================================================
+   HERO
+========================================================= */
+
+.entreprise-hero {
+    min-height:
+        clamp(
+            620px,
+            72vh,
+            780px
+        );
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--steel-deep);
+
+    color:
+        var(--white);
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+}
+
+
+/* =========================================================
+   TECHNICAL GRID
+========================================================= */
+
+.entreprise-hero-grid {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        0;
+
+    pointer-events:
+        none;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        90px
+        90px;
+
+    opacity:
+        0.7;
+}
+
+
+/* léger halo technique */
+
+.entreprise-hero::before {
+    content:
+        "";
+
+    width:
+        650px;
+
+    height:
+        650px;
+
+    position:
+        absolute;
+
+    left:
+        22%;
+
+    top:
+        5%;
+
+    z-index:
+        0;
+
+    pointer-events:
+        none;
+
+    background:
+        radial-gradient(
+            circle,
+            rgba(255, 255, 255, 0.065),
+            transparent 66%
+        );
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.entreprise-hero-inner {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    min-height:
+        clamp(
+            575px,
+            calc(72vh - 44px),
+            736px
+        );
+
+    margin:
+        0 auto;
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 0.92fr)
+        minmax(440px, 0.78fr);
+
+    gap:
+        clamp(
+            45px,
+            6vw,
+            100px
+        );
+
+    align-items:
+        stretch;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.entreprise-hero-content {
+    min-width:
+        0;
+
+    padding:
+        clamp(70px, 8vh, 105px)
+        0
+        clamp(65px, 7vh, 90px);
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    justify-content:
+        center;
+}
+
+
+/* =========================================================
+   KICKER
+========================================================= */
+
+.entreprise-hero-kicker {
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    gap:
+        14px;
+
+    margin-bottom:
+        34px;
+
+    font-size:
+        0.52rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.17em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.48);
+}
+
+
+.entreprise-hero-kicker-line {
+    width:
+        36px;
+
+    height:
+        3px;
+
+    flex:
+        0 0 auto;
+
+    background:
+        var(--signal);
+}
+
+
+/* =========================================================
+   TITLE
+========================================================= */
+
+.entreprise-hero-title {
+    max-width:
+        900px;
+
+    margin:
+        0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            5.2rem,
+            7.9vw,
+            9rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        0.78;
+
+    letter-spacing:
+        -0.045em;
+
+    text-transform:
+        uppercase;
+}
+
+
+.entreprise-hero-title > span {
+    display:
+        block;
+}
+
+
+.entreprise-hero-title-outline {
+    color:
+        transparent;
+
+    -webkit-text-stroke:
+        1px
+        rgba(244, 242, 236, 0.52);
+}
+
+
+/* =========================================================
+   INTRO
+========================================================= */
+
+.entreprise-hero-intro {
+    max-width:
+        590px;
+
+    margin:
+        38px
+        0
+        0;
+
+    padding-left:
+        55px;
+
+    position:
+        relative;
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.75;
+
+    color:
+        rgba(244, 242, 236, 0.58);
+}
+
+
+.entreprise-hero-intro::before {
+    content:
+        "";
+
+    width:
+        34px;
+
+    height:
+        3px;
+
+    position:
+        absolute;
+
+    left:
+        0;
+
+    top:
+        10px;
+
+    background:
+        var(--signal);
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.entreprise-hero-meta {
+    margin-top:
+        42px;
+
+    display:
+        flex;
+
+    flex-wrap:
+        wrap;
+
+    align-items:
+        center;
+
+    gap:
+        16px;
+
+    font-size:
+        0.5rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.48);
+}
+
+
+.entreprise-hero-meta-separator {
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   HISTORY LINK
+========================================================= */
+
+.entreprise-hero-history-link {
+    width:
+        min(
+            100%,
+            530px
+        );
+
+    min-height:
+        64px;
+
+    margin-top:
+        46px;
+
+    padding:
+        0
+        22px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.24);
+
+    text-decoration:
+        none;
+
+    font-size:
+        0.55rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--white);
+
+    transition:
+        background
+        0.35s
+        ease,
+        border-color
+        0.35s
+        ease;
+}
+
+
+.entreprise-hero-history-arrow {
+    font-size:
+        1rem;
+
+    color:
+        var(--signal);
+
+    transition:
+        transform
+        0.45s
+        var(--ease),
+        color
+        0.35s
+        ease;
+}
+
+
+.entreprise-hero-history-link:hover {
+    background:
+        var(--signal);
+
+    border-color:
+        var(--signal);
+}
+
+
+.entreprise-hero-history-link:hover
+.entreprise-hero-history-arrow {
+    color:
+        var(--white);
+
+    transform:
+        translateY(4px);
+}
+
+
+/* =========================================================
+   MEDIA
+========================================================= */
+
+.entreprise-hero-media {
+    min-width:
+        0;
+
+    position:
+        relative;
+
+    overflow:
+        hidden;
+
+    border-left:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    border-right:
+        1px solid
+        rgba(255, 255, 255, 0.12);
+
+    background:
+        var(--steel);
+}
+
+
+.entreprise-hero-media img {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    display:
+        block;
+
+    object-fit:
+        cover;
+
+    object-position:
+        center;
+
+    filter:
+        saturate(0.78)
+        contrast(1.04)
+        brightness(0.82);
+
+    transform:
+        scale(1.01);
+
+    transition:
+        transform
+        1.2s
+        var(--ease),
+        filter
+        0.6s
+        ease;
+}
+
+
+.entreprise-hero-media:hover img {
+    transform:
+        scale(1.035);
+
+    filter:
+        saturate(0.9)
+        contrast(1.04)
+        brightness(0.86);
+}
+
+
+/* =========================================================
+   MEDIA OVERLAY
+========================================================= */
+
+.entreprise-hero-media-overlay {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        1;
+
+    pointer-events:
+        none;
+
+    background:
+        linear-gradient(
+            to bottom,
+            rgba(17, 27, 32, 0.38) 0%,
+            rgba(17, 27, 32, 0.03) 38%,
+            rgba(17, 27, 32, 0.08) 58%,
+            rgba(17, 27, 32, 0.82) 100%
+        );
+}
+
+
+/* =========================================================
+   MEDIA TOP
+========================================================= */
+
+.entreprise-hero-media-top {
+    position:
+        absolute;
+
+    top:
+        26px;
+
+    left:
+        26px;
+
+    right:
+        26px;
+
+    z-index:
+        3;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    font-size:
+        0.48rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.7);
+}
+
+
+.entreprise-hero-media-top
+span:last-child {
+    color:
+        rgba(244, 242, 236, 0.42);
+}
+
+
+/* =========================================================
+   MEDIA BOTTOM
+========================================================= */
+
+.entreprise-hero-media-bottom {
+    position:
+        absolute;
+
+    left:
+        28px;
+
+    right:
+        28px;
+
+    bottom:
+        28px;
+
+    z-index:
+        3;
+
+    display:
+        flex;
+
+    align-items:
+        flex-end;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    padding-top:
+        20px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.25);
+
+    font-size:
+        0.5rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.14em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.58);
+}
+
+
+.entreprise-hero-media-year {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            4.2rem,
+            5.5vw,
+            6.4rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        0.75;
+
+    letter-spacing:
+        -0.035em;
+
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   TECHNICAL CORNERS
+========================================================= */
+
+.entreprise-hero-corner {
+    width:
+        30px;
+
+    height:
+        30px;
+
+    position:
+        absolute;
+
+    z-index:
+        3;
+
+    pointer-events:
+        none;
+}
+
+
+.entreprise-hero-corner-top {
+    top:
+        16px;
+
+    right:
+        16px;
+
+    border-top:
+        2px solid
+        var(--signal);
+
+    border-right:
+        2px solid
+        var(--signal);
+}
+
+
+.entreprise-hero-corner-bottom {
+    left:
+        16px;
+
+    bottom:
+        16px;
+
+    border-left:
+        2px solid
+        var(--signal);
+
+    border-bottom:
+        2px solid
+        var(--signal);
+}
+
+
+/* =========================================================
+   HERO FOOTER
+========================================================= */
+
+.entreprise-hero-footer {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    min-height:
+        44px;
+
+    margin:
+        0 auto;
+
+    position:
+        relative;
+
+    z-index:
+        3;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.15);
+
+    font-size:
+        0.45rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.34);
+}
+
+
+/* =========================================================
+   SIMPLE LOAD REVEAL
+========================================================= */
+
+.entreprise-hero-kicker,
+.entreprise-hero-title,
+.entreprise-hero-intro,
+.entreprise-hero-meta,
+.entreprise-hero-history-link {
+    opacity:
+        0;
+
+    transform:
+        translateY(20px);
+
+    animation:
+        entrepriseHeroReveal
+        0.9s
+        var(--ease)
+        forwards;
+}
+
+
+.entreprise-hero-title {
+    animation-delay:
+        0.08s;
+}
+
+
+.entreprise-hero-intro {
+    animation-delay:
+        0.16s;
+}
+
+
+.entreprise-hero-meta {
+    animation-delay:
+        0.23s;
+}
+
+
+.entreprise-hero-history-link {
+    animation-delay:
+        0.3s;
+}
+
+
+.entreprise-hero-media {
+    opacity:
+        0;
+
+    transform:
+        translateX(20px);
+
+    animation:
+        entrepriseMediaReveal
+        1s
+        var(--ease)
+        0.12s
+        forwards;
+}
+
+
+@keyframes entrepriseHeroReveal {
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translateY(0);
+    }
+
+}
+
+
+@keyframes entrepriseMediaReveal {
+
+    to {
+        opacity:
+            1;
+
+        transform:
+            translateX(0);
+    }
+
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .entreprise-hero {
+        min-height:
+            0;
+    }
+
+
+    .entreprise-hero-inner {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+
+        min-height:
+            0;
+
+        grid-template-columns:
+            minmax(0, 1fr)
+            minmax(320px, 0.7fr);
+
+        gap:
+            32px;
+    }
+
+
+    .entreprise-hero-content {
+        padding:
+            75px
+            0;
+    }
+
+
+    .entreprise-hero-title {
+        font-size:
+            clamp(
+                4.5rem,
+                9vw,
+                6.8rem
+            );
+    }
+
+
+    .entreprise-hero-intro {
+        padding-left:
+            0;
+    }
+
+
+    .entreprise-hero-intro::before {
+        display:
+            none;
+    }
+
+
+    .entreprise-hero-media-year {
+        font-size:
+            4.3rem;
+    }
+
+
+    .entreprise-hero-footer {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .page-entreprise main {
+        padding-top:
+            var(--navbar-height);
+    }
+
+
+    .entreprise-hero {
+        min-height:
+            0;
+    }
+
+
+    .entreprise-hero-inner {
+        width:
+            100%;
+
+        display:
+            flex;
+
+        flex-direction:
+            column;
+
+        gap:
+            0;
+    }
+
+
+    /* CONTENT */
+
+    .entreprise-hero-content {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        margin:
+            0 auto;
+
+        padding:
+            68px
+            0
+            58px;
+
+        order:
+            1;
+    }
+
+
+    .entreprise-hero-kicker {
+        margin-bottom:
+            28px;
+    }
+
+
+    .entreprise-hero-title {
+        font-size:
+            clamp(
+                4.1rem,
+                18vw,
+                6rem
+            );
+
+        line-height:
+            0.79;
+    }
+
+
+    .entreprise-hero-intro {
+        max-width:
+            none;
+
+        margin-top:
+            30px;
+
+        padding:
+            0;
+
+        font-size:
+            0.82rem;
+    }
+
+
+    .entreprise-hero-meta {
+        margin-top:
+            32px;
+
+        gap:
+            10px;
+
+        font-size:
+            0.46rem;
+    }
+
+
+    .entreprise-hero-history-link {
+        width:
+            100%;
+
+        margin-top:
+            34px;
+    }
+
+
+    /* MEDIA */
+
+    .entreprise-hero-media {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        height:
+            430px;
+
+        margin:
+            0
+            auto
+            54px;
+
+        order:
+            2;
+
+        border:
+            1px solid
+            rgba(255, 255, 255, 0.15);
+    }
+
+
+    .entreprise-hero-media-top {
+        top:
+            18px;
+
+        left:
+            18px;
+
+        right:
+            18px;
+    }
+
+
+    .entreprise-hero-media-top
+    span:last-child {
+        display:
+            none;
+    }
+
+
+    .entreprise-hero-media-bottom {
+        left:
+            18px;
+
+        right:
+            18px;
+
+        bottom:
+            18px;
+    }
+
+
+    .entreprise-hero-media-year {
+        font-size:
+            4rem;
+    }
+
+
+    /* FOOTER */
+
+    .entreprise-hero-footer {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        min-height:
+            58px;
+
+        margin:
+            0 auto;
+
+        font-size:
+            0.42rem;
+    }
+
+
+    .entreprise-hero-footer
+    span:nth-child(2) {
+        display:
+            none;
+    }
+
+}
+
+
+/* =========================================================
+   VERY SMALL MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .entreprise-hero-title {
+        font-size:
+            clamp(
+                3.7rem,
+                17vw,
+                4.8rem
+            );
+    }
+
+
+    .entreprise-hero-media {
+        height:
+            380px;
+    }
+
+
+    .entreprise-hero-media-bottom {
+        align-items:
+            center;
+    }
+
+
+    .entreprise-hero-media-year {
+        font-size:
+            3.5rem;
+    }
+
+
+    .entreprise-hero-history-link {
+        min-height:
+            58px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .entreprise-hero-kicker,
+    .entreprise-hero-title,
+    .entreprise-hero-intro,
+    .entreprise-hero-meta,
+    .entreprise-hero-history-link,
+    .entreprise-hero-media {
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        animation:
+            none;
+    }
+
+
+    .entreprise-hero-media img {
+        transition:
+            none;
+    }
+
+}
+
+
+/* =========================================================
+   SMOOTH ANCHOR
+========================================================= */
+
+html {
+    scroll-behavior:
+        smooth;
+}
+
+
+/*
+   Comme la navbar est fixe,
+   on évite que le titre HISTORIQUE
+   arrive caché sous celle-ci.
+*/
+
+#historique {
+    scroll-margin-top:
+        var(--navbar-height);
+}
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.site-footer {
+    background:
+        var(--steel-deep);
+
+    color:
+        var(--white);
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+}
+
+
+.site-footer-inner {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0 auto;
+
+    padding:
+        70px
+        0;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        1fr
+        1fr
+        auto;
+
+    gap:
+        70px;
+
+    align-items:
+        start;
+}
+
+
+.site-footer-brand {
+    max-width:
+        280px;
+}
+
+
+.site-footer-logo {
+    display:
+        inline-block;
+}
+
+
+.site-footer-logo img {
+    width:
+        150px;
+
+    display:
+        block;
+}
+
+
+.site-footer-brand p {
+    margin:
+        20px
+        0
+        0;
+
+    font-size:
+        0.55rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.14em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.42);
+}
+
+
+/* NAV */
+
+.site-footer-nav {
+    display:
+        grid;
+
+    grid-template-columns:
+        repeat(
+            2,
+            minmax(0, 1fr)
+        );
+
+    gap:
+        18px
+        40px;
+}
+
+
+.site-footer-nav a {
+    text-decoration:
+        none;
+
+    font-size:
+        0.58rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.13em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.72);
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.site-footer-nav a:hover {
+    color:
+        var(--signal);
+}
+
+
+/* CONTACT */
+
+.site-footer-contact {
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-end;
+
+    gap:
+        12px;
+}
+
+
+.site-footer-contact span {
+    font-size:
+        0.5rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.38);
+}
+
+
+.site-footer-contact a {
+    text-decoration:
+        none;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        2rem;
+
+    font-weight:
+        600;
+
+    color:
+        var(--white);
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.site-footer-contact a:hover {
+    color:
+        var(--signal);
+}
+
+
+/* BOTTOM */
+
+.site-footer-bottom {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    min-height:
+        72px;
+
+    margin:
+        0 auto;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    font-size:
+        0.46rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.34);
+}
+
+
+.site-footer-bottom a {
+    text-decoration:
+        none;
+
+    color:
+        var(--white);
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.site-footer-bottom a:hover {
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .site-footer-inner {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+
+        grid-template-columns:
+            1fr
+            1fr;
+
+        gap:
+            50px;
+    }
+
+
+    .site-footer-contact {
+        grid-column:
+            1 / 3;
+
+        align-items:
+            flex-start;
+    }
+
+
+    .site-footer-bottom {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .site-footer-inner {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        padding:
+            55px
+            0;
+
+        display:
+            block;
+    }
+
+
+    .site-footer-logo img {
+        width:
+            135px;
+    }
+
+
+    .site-footer-nav {
+        margin-top:
+            42px;
+
+        grid-template-columns:
+            1fr;
+
+        gap:
+            18px;
+    }
+
+
+    .site-footer-contact {
+        margin-top:
+            42px;
+
+        align-items:
+            flex-start;
+    }
+
+
+    .site-footer-contact a {
+        font-size:
+            1.8rem;
+    }
+
+
+    .site-footer-bottom {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        min-height:
+            90px;
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        justify-content:
+            center;
+
+        gap:
+            10px;
+    }
+
+}

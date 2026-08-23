@@ -1,0 +1,984 @@
+/* =========================================================
+   ROURISSOL — 03 NOS MÉTIERS
+========================================================= */
+
+.home-metiers {
+    position: relative;
+    overflow: hidden;
+
+    padding:
+        120px
+        0
+        110px;
+
+    background:
+        var(--concrete-light);
+
+    color:
+        var(--steel-deep);
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.14);
+}
+
+
+/* =========================================================
+   TECHNICAL GRID
+========================================================= */
+
+.home-metiers-grid {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(17, 27, 32, 0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(17, 27, 32, 0.04) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        90px
+        90px;
+
+    opacity: 0.62;
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.home-metiers-inner {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0 auto;
+
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        150px
+        minmax(0, 1fr);
+
+    column-gap: 48px;
+}
+
+
+/* =========================================================
+   INDEX
+========================================================= */
+
+.home-metiers-index {
+    grid-column: 1;
+    grid-row: 1 / 3;
+
+    padding-top: 6px;
+
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+}
+
+
+.home-metiers-number {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 3.25rem;
+    font-weight: 700;
+
+    line-height: 0.9;
+
+    color:
+        var(--signal);
+}
+
+
+.home-metiers-label {
+    margin-top: 16px;
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.15em;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.home-metiers-index::after {
+    content: "";
+
+    width: 34px;
+    height: 3px;
+
+    margin-top: 16px;
+
+    background:
+        var(--signal);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.home-metiers-header {
+    grid-column: 2;
+    grid-row: 1;
+
+    min-width: 0;
+
+    margin-bottom: 64px;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(0, 1.3fr)
+        minmax(280px, 0.7fr);
+
+    gap:
+        clamp(
+            45px,
+            6vw,
+            95px
+        );
+
+    align-items: end;
+}
+
+
+.home-metiers-eyebrow {
+    display: block;
+
+    margin-bottom: 18px;
+
+    font-size: 0.52rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.17em;
+
+    color:
+        rgba(17, 27, 32, 0.48);
+}
+
+
+.home-metiers-heading h2 {
+    max-width: 900px;
+
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            4.2rem,
+            6.8vw,
+            7.4rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.82;
+
+    letter-spacing: -0.035em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.home-metiers-heading h2 span {
+    display: block;
+
+    color:
+        transparent;
+
+    -webkit-text-stroke:
+        1px
+        rgba(17, 27, 32, 0.42);
+}
+
+
+.home-metiers-intro {
+    max-width: 420px;
+
+    margin: 0;
+
+    padding-bottom: 5px;
+
+    font-size: 0.9rem;
+
+    line-height: 1.7;
+
+    color:
+        rgba(17, 27, 32, 0.62);
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.home-metiers-list {
+    grid-column: 2;
+    grid-row: 2;
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.22);
+}
+
+
+.home-metier {
+    min-height: 138px;
+
+    position: relative;
+
+    display: grid;
+
+    grid-template-columns:
+        72px
+        minmax(220px, 0.7fr)
+        minmax(280px, 1fr)
+        54px;
+
+    align-items: center;
+
+    gap: 26px;
+
+    padding:
+        22px
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(17, 27, 32, 0.22);
+
+    text-decoration: none;
+
+    color:
+        inherit;
+
+    overflow: hidden;
+
+    transition:
+        padding-left
+        0.55s
+        var(--ease),
+        background
+        0.4s
+        ease;
+}
+
+
+.home-metier::before {
+    content: "";
+
+    width: 3px;
+    height: 0;
+
+    position: absolute;
+
+    top: 50%;
+    left: 0;
+
+    transform:
+        translateY(-50%);
+
+    background:
+        var(--signal);
+
+    transition:
+        height
+        0.55s
+        var(--ease);
+}
+
+
+.home-metier::after {
+    content: "";
+
+    position: absolute;
+    inset: 0;
+
+    z-index: -1;
+
+    background:
+        linear-gradient(
+            90deg,
+            rgba(255, 48, 56, 0.06),
+            transparent 68%
+        );
+
+    opacity: 0;
+
+    transition:
+        opacity
+        0.4s
+        ease;
+}
+
+
+.home-metier-index {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size: 1.15rem;
+    font-weight: 600;
+
+    color:
+        rgba(17, 27, 32, 0.34);
+
+    transition:
+        color
+        0.35s
+        ease;
+}
+
+
+.home-metier-title {
+    margin: 0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            2.3rem,
+            3.2vw,
+            3.8rem
+        );
+
+    font-weight: 600;
+
+    line-height: 0.92;
+
+    letter-spacing: -0.025em;
+
+    text-transform: uppercase;
+
+    color:
+        var(--steel-deep);
+
+    transition:
+        color
+        0.35s
+        ease,
+        transform
+        0.55s
+        var(--ease);
+}
+
+
+.home-metier-copy {
+    max-width: 560px;
+
+    margin: 0;
+
+    font-size: 0.82rem;
+
+    line-height: 1.65;
+
+    color:
+        rgba(17, 27, 32, 0.54);
+
+    transition:
+        color
+        0.35s
+        ease,
+        transform
+        0.55s
+        var(--ease);
+}
+
+
+.home-metier-arrow {
+    width: 42px;
+    height: 42px;
+
+    justify-self: end;
+
+    display: grid;
+    place-items: center;
+
+    border:
+        1px solid
+        rgba(17, 27, 32, 0.22);
+
+    font-size: 1rem;
+
+    color:
+        var(--steel-deep);
+
+    transition:
+        background
+        0.35s
+        ease,
+        border-color
+        0.35s
+        ease,
+        color
+        0.35s
+        ease,
+        transform
+        0.55s
+        var(--ease);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .home-metier:hover {
+        padding-left: 22px;
+    }
+
+
+    .home-metier:hover::before {
+        height: 100%;
+    }
+
+
+    .home-metier:hover::after {
+        opacity: 1;
+    }
+
+
+    .home-metier:hover
+    .home-metier-index {
+        color:
+            var(--signal);
+    }
+
+
+    .home-metier:hover
+    .home-metier-title {
+        transform:
+            translateX(6px);
+    }
+
+
+    .home-metier:hover
+    .home-metier-copy {
+        transform:
+            translateX(4px);
+
+        color:
+            rgba(17, 27, 32, 0.7);
+    }
+
+
+    .home-metier:hover
+    .home-metier-arrow {
+        background:
+            var(--signal);
+
+        border-color:
+            var(--signal);
+
+        color:
+            var(--white);
+
+        transform:
+            translate(
+                3px,
+                -3px
+            );
+    }
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.home-metiers-footer {
+    grid-column: 2;
+    grid-row: 3;
+
+    margin-top: 42px;
+
+    display: flex;
+
+    justify-content: flex-end;
+}
+
+
+.home-metiers-cta {
+    min-height: 58px;
+
+    padding:
+        0
+        24px;
+
+    display: inline-flex;
+
+    align-items: center;
+
+    gap: 34px;
+
+    border:
+        1px solid
+        rgba(17, 27, 32, 0.28);
+
+    text-decoration: none;
+
+    font-size: 0.58rem;
+    font-weight: 600;
+
+    text-transform: uppercase;
+
+    letter-spacing: 0.13em;
+
+    color:
+        var(--steel-deep);
+
+    transition:
+        background
+        0.35s
+        ease,
+        color
+        0.35s
+        ease,
+        border-color
+        0.35s
+        ease;
+}
+
+
+.home-metiers-cta span:last-child {
+    color:
+        var(--signal);
+
+    font-size: 1rem;
+
+    transition:
+        transform
+        0.4s
+        var(--ease);
+}
+
+
+.home-metiers-cta:hover {
+    background:
+        var(--steel-deep);
+
+    border-color:
+        var(--steel-deep);
+
+    color:
+        var(--white);
+}
+
+
+.home-metiers-cta:hover
+span:last-child {
+    transform:
+        translate(
+            3px,
+            -3px
+        );
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.home-metiers-index,
+.home-metiers-header,
+.home-metier,
+.home-metiers-footer {
+    opacity: 0;
+
+    transform:
+        translateY(24px);
+}
+
+
+.home-metiers.is-visible
+.home-metiers-index,
+.home-metiers.is-visible
+.home-metiers-header,
+.home-metiers.is-visible
+.home-metier,
+.home-metiers.is-visible
+.home-metiers-footer {
+    opacity: 1;
+
+    transform:
+        translateY(0);
+
+    transition:
+        opacity
+        0.75s
+        var(--ease),
+        transform
+        0.85s
+        var(--ease);
+}
+
+
+.home-metiers.is-visible
+.home-metiers-header {
+    transition-delay: 0.08s;
+}
+
+
+.home-metiers.is-visible
+.home-metier:nth-child(1) {
+    transition-delay: 0.12s;
+}
+
+
+.home-metiers.is-visible
+.home-metier:nth-child(2) {
+    transition-delay: 0.18s;
+}
+
+
+.home-metiers.is-visible
+.home-metier:nth-child(3) {
+    transition-delay: 0.24s;
+}
+
+
+.home-metiers.is-visible
+.home-metier:nth-child(4) {
+    transition-delay: 0.30s;
+}
+
+
+.home-metiers.is-visible
+.home-metiers-footer {
+    transition-delay: 0.36s;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .home-metiers {
+        padding:
+            95px
+            0
+            85px;
+    }
+
+
+    .home-metiers-inner {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+
+        grid-template-columns:
+            100px
+            minmax(0, 1fr);
+
+        column-gap:
+            32px;
+    }
+
+
+    .home-metiers-header {
+        grid-template-columns:
+            1fr;
+
+        gap:
+            30px;
+
+        margin-bottom:
+            48px;
+    }
+
+
+    .home-metiers-intro {
+        max-width:
+            620px;
+    }
+
+
+    .home-metier {
+        grid-template-columns:
+            55px
+            minmax(190px, 0.8fr)
+            minmax(220px, 1fr)
+            44px;
+
+        gap:
+            18px;
+
+        min-height:
+            125px;
+    }
+
+
+    .home-metier-arrow {
+        width:
+            38px;
+
+        height:
+            38px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .home-metiers {
+        padding:
+            78px
+            0
+            70px;
+    }
+
+
+    .home-metiers-inner {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        display:
+            block;
+    }
+
+
+    .home-metiers-index {
+        margin-bottom:
+            36px;
+
+        padding:
+            0;
+
+        flex-direction:
+            row;
+
+        align-items:
+            baseline;
+
+        gap:
+            14px;
+    }
+
+
+    .home-metiers-index::after {
+        display:
+            none;
+    }
+
+
+    .home-metiers-number {
+        font-size:
+            2.5rem;
+    }
+
+
+    .home-metiers-label {
+        margin:
+            0;
+
+        font-size:
+            0.52rem;
+    }
+
+
+    .home-metiers-header {
+        display:
+            block;
+
+        margin-bottom:
+            38px;
+    }
+
+
+    .home-metiers-eyebrow {
+        margin-bottom:
+            14px;
+    }
+
+
+    .home-metiers-heading h2 {
+        font-size:
+            clamp(
+                3.4rem,
+                16vw,
+                5rem
+            );
+
+        line-height:
+            0.82;
+    }
+
+
+    .home-metiers-intro {
+        margin-top:
+            24px;
+
+        font-size:
+            0.82rem;
+    }
+
+
+    .home-metier {
+        min-height:
+            0;
+
+        grid-template-columns:
+            38px
+            minmax(0, 1fr)
+            36px;
+
+        gap:
+            12px;
+
+        padding:
+            23px
+            0;
+    }
+
+
+    .home-metier-index {
+        grid-column:
+            1;
+
+        grid-row:
+            1;
+    }
+
+
+    .home-metier-title {
+        grid-column:
+            2;
+
+        grid-row:
+            1;
+
+        font-size:
+            clamp(
+                2.1rem,
+                11vw,
+                3rem
+            );
+    }
+
+
+    .home-metier-copy {
+        grid-column:
+            2 / 4;
+
+        grid-row:
+            2;
+
+        max-width:
+            100%;
+
+        margin-top:
+            4px;
+
+        font-size:
+            0.76rem;
+    }
+
+
+    .home-metier-arrow {
+        grid-column:
+            3;
+
+        grid-row:
+            1;
+
+        width:
+            34px;
+
+        height:
+            34px;
+    }
+
+
+    .home-metiers-footer {
+        margin-top:
+            30px;
+
+        justify-content:
+            stretch;
+    }
+
+
+    .home-metiers-cta {
+        width:
+            100%;
+
+        justify-content:
+            space-between;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .home-metiers-index,
+    .home-metiers-header,
+    .home-metier,
+    .home-metiers-footer {
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
+    }
+
+}

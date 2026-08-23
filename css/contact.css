@@ -1,0 +1,1028 @@
+/* =========================================================
+   ROURISSOL — 06 CONTACT
+========================================================= */
+
+.home-contact {
+    position: relative;
+    overflow: hidden;
+
+    background:
+        var(--steel-deep);
+
+    color:
+        var(--white);
+}
+
+
+/* =========================================================
+   TECHNICAL GRID
+========================================================= */
+
+.home-contact-grid {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(255, 255, 255, 0.035) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        90px
+        90px;
+
+    opacity:
+        0.55;
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.home-contact-inner {
+    min-height: 0;
+
+    position: relative;
+    z-index: 2;
+
+    display: grid;
+
+    grid-template-columns:
+        minmax(540px, 1.08fr)
+        minmax(460px, 0.92fr);
+
+    align-items: stretch;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.home-contact-content {
+    padding:
+        100px
+        clamp(50px, 6vw, 100px);
+
+    display: flex;
+
+    flex-direction: column;
+}
+
+
+/* =========================================================
+   INDEX
+========================================================= */
+
+.home-contact-index {
+    display: flex;
+
+    align-items: baseline;
+
+    gap: 16px;
+
+    margin-bottom:
+        70px;
+}
+
+
+.home-contact-number {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        3.25rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        0.9;
+
+    color:
+        var(--signal);
+}
+
+
+.home-contact-label {
+    font-size:
+        0.58rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.52);
+}
+
+
+/* =========================================================
+   HEADING
+========================================================= */
+
+.home-contact-heading {
+    max-width:
+        700px;
+}
+
+
+.home-contact-eyebrow {
+    display: block;
+
+    margin-bottom:
+        18px;
+
+    font-size:
+        0.52rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.17em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--signal);
+}
+
+
+.home-contact-heading h2 {
+    margin:
+        0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            4.8rem,
+            7vw,
+            8rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        0.78;
+
+    letter-spacing:
+        -0.04em;
+
+    text-transform:
+        uppercase;
+}
+
+
+.home-contact-heading h2 span {
+    display: block;
+
+    color:
+        transparent;
+
+    -webkit-text-stroke:
+        1px
+        rgba(244, 242, 236, 0.48);
+}
+
+
+.home-contact-heading p {
+    max-width:
+        500px;
+
+    margin:
+        32px
+        0
+        0;
+
+    font-size:
+        0.88rem;
+
+    line-height:
+        1.7;
+
+    color:
+        rgba(244, 242, 236, 0.55);
+}
+
+
+/* =========================================================
+   PHONE
+========================================================= */
+
+.home-contact-phone {
+    margin-top:
+        54px;
+
+    padding:
+        24px
+        0;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.16);
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.16);
+}
+
+
+.home-contact-small-label {
+    display: block;
+
+    margin-bottom:
+        8px;
+
+    font-size:
+        0.48rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.16em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.38);
+}
+
+
+.home-contact-phone a {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            2.2rem,
+            3.4vw,
+            4rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        1;
+
+    text-decoration:
+        none;
+
+    color:
+        var(--white);
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.home-contact-phone a:hover {
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   LOCATIONS
+========================================================= */
+
+.home-contact-locations {
+    margin-top:
+        28px;
+}
+
+
+.home-contact-location {
+    width:
+        100%;
+
+    min-height:
+        92px;
+
+    position:
+        relative;
+
+    display: grid;
+
+    grid-template-columns:
+        40px
+        minmax(0, 1fr)
+        40px;
+
+    gap:
+        16px;
+
+    align-items:
+        center;
+
+    padding:
+        18px
+        0;
+
+    border:
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    background:
+        transparent;
+
+    color:
+        var(--white);
+
+    text-align:
+        left;
+
+    cursor:
+        pointer;
+}
+
+
+.home-contact-location-index {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        1rem;
+
+    color:
+        rgba(244, 242, 236, 0.34);
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.home-contact-location-content {
+    display: flex;
+
+    flex-direction: column;
+
+    gap:
+        3px;
+}
+
+
+.home-contact-location-content strong {
+    margin-bottom:
+        4px;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        1.35rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.02em;
+}
+
+
+.home-contact-location-content span {
+    font-size:
+        0.72rem;
+
+    color:
+        rgba(244, 242, 236, 0.46);
+}
+
+
+.home-contact-location-arrow {
+    width:
+        34px;
+
+    height:
+        34px;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.18);
+
+    transition:
+        background
+        0.35s
+        ease,
+        border-color
+        0.35s
+        ease,
+        transform
+        0.4s
+        var(--ease);
+}
+
+
+/* =========================================================
+   ACTIVE
+========================================================= */
+
+.home-contact-location.is-active
+.home-contact-location-index {
+    color:
+        var(--signal);
+}
+
+
+.home-contact-location.is-active
+.home-contact-location-arrow {
+    background:
+        var(--signal);
+
+    border-color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .home-contact-location:hover
+    .home-contact-location-arrow {
+        transform:
+            translate(
+                3px,
+                -3px
+            );
+
+        border-color:
+            var(--signal);
+    }
+
+}
+
+
+/* =========================================================
+   CTA
+========================================================= */
+
+.home-contact-cta {
+    min-height:
+        62px;
+
+    margin-top:
+        38px;
+
+    padding:
+        0
+        24px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.28);
+
+    text-decoration:
+        none;
+
+    font-size:
+        0.58rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.14em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--white);
+
+    transition:
+        background
+        0.35s
+        ease,
+        border-color
+        0.35s
+        ease;
+}
+
+
+.home-contact-cta span:last-child {
+    color:
+        var(--signal);
+
+    font-size:
+        1rem;
+
+    transition:
+        transform
+        0.4s
+        var(--ease);
+}
+
+
+.home-contact-cta:hover {
+    background:
+        var(--signal);
+
+    border-color:
+        var(--signal);
+}
+
+
+.home-contact-cta:hover
+span:last-child {
+    color:
+        var(--white);
+
+    transform:
+        translate(
+            3px,
+            -3px
+        );
+}
+
+
+/* =========================================================
+   MAP
+========================================================= */
+
+.home-contact-map {
+    height:
+        620px;
+
+    min-height:
+        0;
+
+    position:
+        relative;
+
+    align-self:
+        center;
+
+    margin:
+        70px
+        40px
+        70px
+        0;
+
+    overflow:
+        hidden;
+
+    background:
+        var(--concrete);
+
+    border:
+        1px solid
+        rgba(255, 255, 255, 0.10);
+}
+
+
+.home-contact-map iframe {
+    width:
+        100%;
+
+    height:
+        100%;
+
+    min-height:
+        0;
+
+    display:
+        block;
+
+    border:
+        0;
+
+    filter:
+        grayscale(1)
+        saturate(0.25)
+        contrast(1.08)
+        brightness(0.88);
+
+    transition:
+        filter
+        0.6s
+        ease,
+        opacity
+        0.3s
+        ease;
+}
+
+
+.home-contact-map:hover iframe {
+    filter:
+        grayscale(0.35)
+        saturate(0.7)
+        contrast(1.03)
+        brightness(0.95);
+}
+
+
+.home-contact-map.is-switching iframe {
+    opacity:
+        0.35;
+}
+
+
+/* =========================================================
+   MAP OVERLAY
+========================================================= */
+
+.home-contact-map-overlay {
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    pointer-events:
+        none;
+
+    box-shadow:
+        inset
+        30px
+        0
+        70px
+        rgba(17, 27, 32, 0.18);
+}
+
+
+/* =========================================================
+   MAP META
+========================================================= */
+
+.home-contact-map-meta {
+    position:
+        absolute;
+
+    top:
+        24px;
+
+    left:
+        24px;
+
+    right:
+        24px;
+
+    z-index:
+        3;
+
+    min-height:
+        46px;
+
+    padding:
+        0
+        16px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        20px;
+
+    background:
+        rgba(17, 27, 32, 0.90);
+
+    backdrop-filter:
+        blur(12px);
+
+    -webkit-backdrop-filter:
+        blur(12px);
+
+    font-size:
+        0.5rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--white);
+}
+
+
+.home-contact-map-meta
+span:last-child {
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   BOTTOM
+========================================================= */
+
+.home-contact-bottom {
+    min-height:
+        72px;
+
+    position:
+        relative;
+
+    z-index:
+        4;
+
+    padding:
+        0
+        40px;
+
+    display:
+        flex;
+
+    align-items:
+        center;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    border-top:
+        1px solid
+        rgba(255, 255, 255, 0.14);
+
+    background:
+        var(--steel-deep);
+
+    font-size:
+        0.47rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(244, 242, 236, 0.36);
+}
+
+
+.home-contact-bottom a {
+    text-decoration:
+        none;
+
+    color:
+        var(--white);
+
+    transition:
+        color
+        0.3s
+        ease;
+}
+
+
+.home-contact-bottom a:hover {
+    color:
+        var(--signal);
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .home-contact-inner {
+        min-height:
+            0;
+
+        grid-template-columns:
+            1fr;
+    }
+
+
+    .home-contact-content {
+        padding:
+            90px
+            7%;
+    }
+
+
+    .home-contact-map {
+        width:
+            auto;
+
+        height:
+            480px;
+
+        min-height:
+            0;
+
+        margin:
+            0
+            7%
+            70px;
+
+        align-self:
+            auto;
+    }
+
+
+    .home-contact-map iframe {
+        min-height:
+            0;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .home-contact-content {
+        padding:
+            75px
+            18px
+            60px;
+    }
+
+
+    .home-contact-index {
+        margin-bottom:
+            42px;
+    }
+
+
+    .home-contact-number {
+        font-size:
+            2.5rem;
+    }
+
+
+    .home-contact-heading h2 {
+        font-size:
+            clamp(
+                3.8rem,
+                17vw,
+                5.3rem
+            );
+    }
+
+
+    .home-contact-heading p {
+        font-size:
+            0.8rem;
+    }
+
+
+    .home-contact-phone {
+        margin-top:
+            42px;
+    }
+
+
+    .home-contact-location {
+        grid-template-columns:
+            30px
+            minmax(0, 1fr)
+            34px;
+
+        gap:
+            10px;
+    }
+
+
+    .home-contact-location-content strong {
+        font-size:
+            1.15rem;
+    }
+
+
+    .home-contact-map {
+        width:
+            auto;
+
+        height:
+            360px;
+
+        min-height:
+            0;
+
+        margin:
+            0
+            18px
+            50px;
+    }
+
+
+    .home-contact-map iframe {
+        min-height:
+            0;
+    }
+
+
+    .home-contact-map-meta {
+        top:
+            14px;
+
+        left:
+            14px;
+
+        right:
+            14px;
+    }
+
+
+    .home-contact-bottom {
+        min-height:
+            90px;
+
+        padding:
+            18px;
+
+        flex-direction:
+            column;
+
+        align-items:
+            flex-start;
+
+        justify-content:
+            center;
+
+        gap:
+            10px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .home-contact-map iframe,
+    .home-contact-location-arrow,
+    .home-contact-cta {
+        transition:
+            none;
+    }
+
+}

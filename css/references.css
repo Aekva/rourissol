@@ -1,0 +1,962 @@
+/* =========================================================
+   ROURISSOL — 05 RÉFÉRENCES
+========================================================= */
+
+.home-references {
+    position: relative;
+    overflow: hidden;
+
+    padding:
+        120px
+        0
+        105px;
+
+    background:
+        var(--concrete-light);
+
+    color:
+        var(--steel-deep);
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.16);
+}
+
+
+/* =========================================================
+   TECHNICAL GRID
+========================================================= */
+
+.home-references-grid {
+    position: absolute;
+    inset: 0;
+
+    z-index: 0;
+
+    pointer-events: none;
+
+    background-image:
+        linear-gradient(
+            rgba(17, 27, 32, 0.04) 1px,
+            transparent 1px
+        ),
+        linear-gradient(
+            90deg,
+            rgba(17, 27, 32, 0.04) 1px,
+            transparent 1px
+        );
+
+    background-size:
+        90px
+        90px;
+
+    opacity:
+        0.6;
+}
+
+
+/* =========================================================
+   INNER
+========================================================= */
+
+.home-references-inner {
+    width:
+        min(
+            1480px,
+            calc(100% - 80px)
+        );
+
+    margin:
+        0 auto;
+
+    position:
+        relative;
+
+    z-index:
+        2;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        150px
+        minmax(0, 1fr);
+
+    column-gap:
+        48px;
+}
+
+
+/* =========================================================
+   INDEX
+========================================================= */
+
+.home-references-index {
+    grid-column:
+        1;
+
+    grid-row:
+        1 / 4;
+
+    padding-top:
+        6px;
+
+    display:
+        flex;
+
+    flex-direction:
+        column;
+
+    align-items:
+        flex-start;
+}
+
+
+.home-references-number {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        3.25rem;
+
+    font-weight:
+        700;
+
+    line-height:
+        0.9;
+
+    color:
+        var(--signal);
+}
+
+
+.home-references-label {
+    margin-top:
+        16px;
+
+    font-size:
+        0.58rem;
+
+    font-weight:
+        600;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.15em;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.home-references-index::after {
+    content:
+        "";
+
+    width:
+        34px;
+
+    height:
+        3px;
+
+    margin-top:
+        16px;
+
+    background:
+        var(--signal);
+}
+
+
+/* =========================================================
+   HEADER
+========================================================= */
+
+.home-references-header {
+    grid-column:
+        2;
+
+    grid-row:
+        1;
+
+    margin-bottom:
+        64px;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        minmax(0, 1.3fr)
+        minmax(280px, 0.7fr);
+
+    gap:
+        clamp(
+            45px,
+            6vw,
+            95px
+        );
+
+    align-items:
+        end;
+}
+
+
+.home-references-eyebrow {
+    display:
+        block;
+
+    margin-bottom:
+        18px;
+
+    font-size:
+        0.52rem;
+
+    font-weight:
+        600;
+
+    text-transform:
+        uppercase;
+
+    letter-spacing:
+        0.17em;
+
+    color:
+        rgba(17, 27, 32, 0.48);
+}
+
+
+.home-references-heading h2 {
+    max-width:
+        900px;
+
+    margin:
+        0;
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            4.2rem,
+            6.8vw,
+            7.4rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        0.82;
+
+    letter-spacing:
+        -0.035em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--steel-deep);
+}
+
+
+.home-references-heading h2 span {
+    display:
+        block;
+
+    color:
+        transparent;
+
+    -webkit-text-stroke:
+        1px
+        rgba(17, 27, 32, 0.42);
+}
+
+
+.home-references-intro {
+    max-width:
+        420px;
+
+    margin:
+        0;
+
+    padding-bottom:
+        4px;
+
+    font-size:
+        0.9rem;
+
+    line-height:
+        1.7;
+
+    color:
+        rgba(17, 27, 32, 0.6);
+}
+
+
+/* =========================================================
+   LIST
+========================================================= */
+
+.home-references-list {
+    grid-column:
+        2;
+
+    grid-row:
+        2;
+
+    border-top:
+        1px solid
+        rgba(17, 27, 32, 0.24);
+}
+
+
+.home-reference {
+    min-height:
+        122px;
+
+    position:
+        relative;
+
+    display:
+        grid;
+
+    grid-template-columns:
+        70px
+        minmax(260px, 1fr)
+        minmax(200px, 0.55fr)
+        46px;
+
+    gap:
+        24px;
+
+    align-items:
+        center;
+
+    padding:
+        20px
+        0;
+
+    border-bottom:
+        1px solid
+        rgba(17, 27, 32, 0.24);
+
+    overflow:
+        hidden;
+
+    transition:
+        padding-left
+        0.55s
+        var(--ease);
+}
+
+
+.home-reference::before {
+    content:
+        "";
+
+    position:
+        absolute;
+
+    inset:
+        0;
+
+    z-index:
+        -1;
+
+    background:
+        var(--steel-deep);
+
+    transform:
+        scaleY(0);
+
+    transform-origin:
+        bottom;
+
+    transition:
+        transform
+        0.55s
+        var(--ease);
+}
+
+
+.home-reference-index {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        1rem;
+
+    font-weight:
+        600;
+
+    color:
+        var(--signal);
+
+    transition:
+        transform
+        0.55s
+        var(--ease);
+}
+
+
+.home-reference-name {
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        clamp(
+            2.8rem,
+            4.6vw,
+            5.5rem
+        );
+
+    font-weight:
+        600;
+
+    line-height:
+        0.86;
+
+    letter-spacing:
+        -0.025em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        var(--steel-deep);
+
+    transition:
+        color
+        0.4s
+        ease,
+        transform
+        0.55s
+        var(--ease);
+}
+
+
+.home-reference-detail {
+    font-size:
+        0.58rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.12em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(17, 27, 32, 0.46);
+
+    transition:
+        color
+        0.4s
+        ease;
+}
+
+
+.home-reference-mark {
+    width:
+        38px;
+
+    height:
+        38px;
+
+    justify-self:
+        end;
+
+    display:
+        grid;
+
+    place-items:
+        center;
+
+    border:
+        1px solid
+        rgba(17, 27, 32, 0.22);
+
+    font-family:
+        "Barlow Condensed",
+        sans-serif;
+
+    font-size:
+        1.3rem;
+
+    color:
+        var(--signal);
+
+    transition:
+        transform
+        0.55s
+        var(--ease),
+        border-color
+        0.4s
+        ease,
+        color
+        0.4s
+        ease;
+}
+
+
+/* =========================================================
+   HOVER
+========================================================= */
+
+@media (hover: hover) and (pointer: fine) {
+
+    .home-reference:hover {
+        padding-left:
+            22px;
+    }
+
+
+    .home-reference:hover::before {
+        transform:
+            scaleY(1);
+    }
+
+
+    .home-reference:hover
+    .home-reference-index {
+        transform:
+            translateX(4px);
+    }
+
+
+    .home-reference:hover
+    .home-reference-name {
+        color:
+            var(--white);
+
+        transform:
+            translateX(6px);
+    }
+
+
+    .home-reference:hover
+    .home-reference-detail {
+        color:
+            rgba(244, 242, 236, 0.55);
+    }
+
+
+    .home-reference:hover
+    .home-reference-mark {
+        border-color:
+            var(--signal);
+
+        color:
+            var(--white);
+
+        transform:
+            rotate(45deg);
+    }
+
+}
+
+
+/* =========================================================
+   FOOTER
+========================================================= */
+
+.home-references-footer {
+    grid-column:
+        2;
+
+    grid-row:
+        3;
+
+    margin-top:
+        30px;
+
+    display:
+        flex;
+
+    justify-content:
+        space-between;
+
+    gap:
+        30px;
+
+    font-size:
+        0.46rem;
+
+    font-weight:
+        600;
+
+    letter-spacing:
+        0.15em;
+
+    text-transform:
+        uppercase;
+
+    color:
+        rgba(17, 27, 32, 0.34);
+}
+
+
+/* =========================================================
+   REVEAL
+========================================================= */
+
+.home-references-index,
+.home-references-header,
+.home-reference,
+.home-references-footer {
+    opacity:
+        0;
+
+    transform:
+        translateY(24px);
+}
+
+
+.home-references.is-visible
+.home-references-index,
+.home-references.is-visible
+.home-references-header,
+.home-references.is-visible
+.home-reference,
+.home-references.is-visible
+.home-references-footer {
+    opacity:
+        1;
+
+    transform:
+        translateY(0);
+
+    transition:
+        opacity
+        0.75s
+        var(--ease),
+        transform
+        0.85s
+        var(--ease);
+}
+
+
+.home-references.is-visible
+.home-references-header {
+    transition-delay:
+        0.06s;
+}
+
+
+.home-references.is-visible
+.home-reference:nth-child(1) {
+    transition-delay:
+        0.12s;
+}
+
+
+.home-references.is-visible
+.home-reference:nth-child(2) {
+    transition-delay:
+        0.17s;
+}
+
+
+.home-references.is-visible
+.home-reference:nth-child(3) {
+    transition-delay:
+        0.22s;
+}
+
+
+.home-references.is-visible
+.home-reference:nth-child(4) {
+    transition-delay:
+        0.27s;
+}
+
+
+.home-references.is-visible
+.home-references-footer {
+    transition-delay:
+        0.32s;
+}
+
+
+/* =========================================================
+   TABLET
+========================================================= */
+
+@media (max-width: 1050px) {
+
+    .home-references {
+        padding:
+            95px
+            0
+            85px;
+    }
+
+
+    .home-references-inner {
+        width:
+            calc(
+                100%
+                - 56px
+            );
+
+        grid-template-columns:
+            100px
+            minmax(0, 1fr);
+
+        column-gap:
+            32px;
+    }
+
+
+    .home-references-header {
+        grid-template-columns:
+            1fr;
+
+        gap:
+            28px;
+
+        margin-bottom:
+            48px;
+    }
+
+
+    .home-references-intro {
+        max-width:
+            620px;
+    }
+
+
+    .home-reference {
+        grid-template-columns:
+            48px
+            minmax(200px, 1fr)
+            minmax(150px, 0.55fr)
+            40px;
+
+        gap:
+            16px;
+
+        min-height:
+            110px;
+    }
+
+}
+
+
+/* =========================================================
+   MOBILE
+========================================================= */
+
+@media (max-width: 650px) {
+
+    .home-references {
+        padding:
+            78px
+            0
+            68px;
+    }
+
+
+    .home-references-inner {
+        width:
+            calc(
+                100%
+                - 36px
+            );
+
+        display:
+            block;
+    }
+
+
+    .home-references-index {
+        margin-bottom:
+            36px;
+
+        padding:
+            0;
+
+        flex-direction:
+            row;
+
+        align-items:
+            baseline;
+
+        gap:
+            14px;
+    }
+
+
+    .home-references-index::after {
+        display:
+            none;
+    }
+
+
+    .home-references-number {
+        font-size:
+            2.5rem;
+    }
+
+
+    .home-references-label {
+        margin:
+            0;
+
+        font-size:
+            0.52rem;
+    }
+
+
+    .home-references-header {
+        display:
+            block;
+
+        margin-bottom:
+            36px;
+    }
+
+
+    .home-references-heading h2 {
+        font-size:
+            clamp(
+                3.4rem,
+                16vw,
+                5rem
+            );
+    }
+
+
+    .home-references-intro {
+        margin-top:
+            24px;
+
+        font-size:
+            0.82rem;
+    }
+
+
+    .home-reference {
+        min-height:
+            100px;
+
+        grid-template-columns:
+            34px
+            minmax(0, 1fr)
+            34px;
+
+        gap:
+            10px;
+
+        padding:
+            20px
+            0;
+    }
+
+
+    .home-reference-index {
+        grid-column:
+            1;
+
+        grid-row:
+            1;
+    }
+
+
+    .home-reference-name {
+        grid-column:
+            2;
+
+        grid-row:
+            1;
+
+        font-size:
+            clamp(
+                2.3rem,
+                11vw,
+                3.4rem
+            );
+    }
+
+
+    .home-reference-detail {
+        grid-column:
+            2 / 4;
+
+        grid-row:
+            2;
+
+        margin-top:
+            4px;
+
+        font-size:
+            0.5rem;
+    }
+
+
+    .home-reference-mark {
+        grid-column:
+            3;
+
+        grid-row:
+            1;
+
+        width:
+            32px;
+
+        height:
+            32px;
+    }
+
+
+    .home-references-footer {
+        margin-top:
+            26px;
+
+        display:
+            block;
+    }
+
+
+    .home-references-footer span {
+        display:
+            block;
+    }
+
+
+    .home-references-footer span + span {
+        margin-top:
+            8px;
+    }
+
+}
+
+
+/* =========================================================
+   REDUCED MOTION
+========================================================= */
+
+@media (prefers-reduced-motion: reduce) {
+
+    .home-references-index,
+    .home-references-header,
+    .home-reference,
+    .home-references-footer {
+        opacity:
+            1;
+
+        transform:
+            none;
+
+        transition:
+            none;
+    }
+
+}

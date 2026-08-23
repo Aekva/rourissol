@@ -564,3 +564,32 @@ if (
         );
 
 }
+
+/* =========================================================
+   VIDEO PERFORMANCE
+========================================================= */
+
+const observedVideos = document.querySelectorAll(
+    ".hero-media video, .home-realisation-video video"
+);
+
+const videoObserver = new IntersectionObserver(
+    entries => {
+        entries.forEach(entry => {
+            const video = entry.target;
+
+            if (entry.isIntersecting) {
+                video.play().catch(() => {});
+            } else {
+                video.pause();
+            }
+        });
+    },
+    {
+        threshold: 0.15
+    }
+);
+
+observedVideos.forEach(video => {
+    videoObserver.observe(video);
+});

@@ -1,12 +1,12 @@
 /* =========================================================
-   ROURISSOL — 03 NOS MÉTIERS
+   ROURISSOL — 04 RÉALISATIONS
 ========================================================= */
 
 (() => {
 
     const section =
         document.querySelector(
-            ".home-metiers"
+            ".home-realisations"
         );
 
 
@@ -21,12 +21,6 @@
         );
 
 
-    /*
-       Si l'utilisateur préfère réduire
-       les animations, on affiche directement
-       la section.
-    */
-
     if (reducedMotion.matches) {
 
         section.classList.add(
@@ -36,11 +30,6 @@
         return;
     }
 
-
-    /*
-       La section apparaît une seule fois
-       lorsqu'elle entre dans le viewport.
-    */
 
     const observer =
         new IntersectionObserver(
@@ -63,11 +52,6 @@
                         );
 
 
-                        /*
-                           Une fois l'animation lancée,
-                           plus besoin d'observer.
-                        */
-
                         observer.unobserve(
                             section
                         );
@@ -79,7 +63,8 @@
             },
 
             {
-                threshold: 0.14
+                threshold:
+                    0.12
             }
 
         );
