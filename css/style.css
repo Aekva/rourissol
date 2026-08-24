@@ -4471,3 +4471,16 @@ span:last-child {
         translate(-50%, -50%)
         rotate(45deg);
 }
+
+
+/* =========================================================
+   MAQUETTE DÉMO — LIENS INACTIFS
+========================================================= */
+
+.demo-link-disabled {
+    pointer-events: none !important;
+
+    cursor: default !important;
+
+    opacity: 1;
+}

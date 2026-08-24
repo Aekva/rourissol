@@ -593,3 +593,81 @@ const videoObserver = new IntersectionObserver(
 observedVideos.forEach(video => {
     videoObserver.observe(video);
 });
+
+/* =========================================================
+   MAQUETTE DÉMO — LIENS DE PAGES INACTIFS
+========================================================= */
+
+(() => {
+
+    const demoDisabledPages = new Set([
+        "metiers.html",
+        "realisations.html",
+        "references.html",
+        "recrutement.html",
+        "contact.html"
+    ]);
+
+
+    document
+        .querySelectorAll("a[href]")
+        .forEach(link => {
+
+            const rawHref =
+                link.getAttribute("href");
+
+            if (!rawHref) {
+                return;
+            }
+
+
+            /*
+               Retire :
+               - ./ éventuel
+               - #ancre
+               - ?query
+            */
+
+            const page =
+                rawHref
+                    .replace(/^\.\//, "")
+                    .split("#")[0]
+                    .split("?")[0];
+
+
+            if (
+                !demoDisabledPages.has(page)
+            ) {
+                return;
+            }
+
+
+            link.classList.add(
+                "demo-link-disabled"
+            );
+
+
+            link.setAttribute(
+                "aria-disabled",
+                "true"
+            );
+
+
+            link.setAttribute(
+                "tabindex",
+                "-1"
+            );
+
+
+            link.addEventListener(
+                "click",
+                event => {
+
+                    event.preventDefault();
+
+                }
+            );
+
+        });
+
+})();

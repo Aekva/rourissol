@@ -1,9 +1,14 @@
 /* =========================================================
-   ROURISSOL — HISTORIQUE DIAL
-   TABLETTE + MOBILE
+   ROURISSOL — HISTORIQUE
+   RÈGLE GRADUÉE TABLETTE / MOBILE
 ========================================================= */
 
-.history-dial {
+/* =========================================================
+   DESKTOP
+   La timeline historique classique reste inchangée.
+========================================================= */
+
+.history-ruler {
     display: none;
 }
 
@@ -14,42 +19,45 @@
 
 @media (max-width: 1050px) {
 
-    /* On remplace uniquement la timeline classique */
+    /*
+       On masque uniquement la timeline desktop.
+       historique.js continue quand même à la générer,
+       car la règle utilise ses boutons en arrière-plan.
+    */
+
     .history-timeline-wrapper {
         display: none !important;
     }
 
 
-    .history-dial {
-        grid-column: 2;
+    /* =====================================================
+       ROOT
+    ====================================================== */
 
+    .history-ruler {
         width: 100%;
-        max-width: 760px;
 
-        margin:
-            26px
-            auto
-            0;
+        margin-top: 28px;
 
         display: block;
 
         position: relative;
 
+        color: var(--steel-deep);
+
         user-select: none;
         -webkit-user-select: none;
-
-        touch-action: pan-y;
     }
 
 
     /* =====================================================
-       PETITE LÉGENDE
-    ===================================================== */
+       HEADER
+       1969 reste toujours à gauche
+       2022 reste toujours à droite
+    ====================================================== */
 
-    .history-dial-header {
-        width: 100%;
-
-        margin-bottom: 9px;
+    .history-ruler-header {
+        min-height: 38px;
 
         display: grid;
 
@@ -60,41 +68,48 @@
 
         align-items: center;
 
-        font-size: 0.46rem;
+        gap: 20px;
+
+        border-bottom:
+            1px solid
+            rgba(17, 27, 32, 0.18);
+
+        font-size: 0.48rem;
         font-weight: 600;
 
-        letter-spacing: 0.14em;
+        letter-spacing: 0.16em;
 
         text-transform: uppercase;
 
         color:
-            rgba(17, 27, 32, 0.42);
+            rgba(17, 27, 32, 0.46);
     }
 
 
-    .history-dial-header span:first-child {
+    .history-ruler-header-start {
         text-align: left;
     }
 
 
-    .history-dial-header span:nth-child(2) {
+    .history-ruler-header-title {
         text-align: center;
+
+        color:
+            rgba(17, 27, 32, 0.52);
     }
 
 
-    .history-dial-header span:last-child {
+    .history-ruler-header-end {
         text-align: right;
     }
 
 
     /* =====================================================
-       RAPPORTEUR
-       Côté plat en haut / courbe dessous
-    ===================================================== */
+       VIEWPORT
+    ====================================================== */
 
-    .history-dial-shell {
-        width: 100%;
-        height: 230px;
+    .history-ruler-viewport {
+        height: 155px;
 
         position: relative;
 
@@ -102,67 +117,30 @@
 
         cursor: grab;
 
-        border:
+        touch-action: pan-y;
+
+        border-left:
             1px solid
             rgba(17, 27, 32, 0.16);
 
-        border-top:
-            0;
-
-        border-radius:
-            0
-            0
-            50%
-            50%
-            /
-            0
-            0
-            94%
-            94%;
-
-        background:
-            linear-gradient(
-                to bottom,
-                rgba(17, 27, 32, 0.018),
-                rgba(17, 27, 32, 0.045)
-            );
+        border-right:
+            1px solid
+            rgba(17, 27, 32, 0.16);
     }
 
 
-    /* ligne plate contre la scène */
-
-    .history-dial-shell::before {
-        content: "";
-
-        position: absolute;
-
-        top: 0;
-        left: 0;
-        right: 0;
-
-        z-index: 1;
-
-        height: 1px;
-
-        background:
-            rgba(17, 27, 32, 0.22);
-    }
-
-
-    .history-dial.is-dragging
-    .history-dial-shell {
+    .history-ruler-viewport.is-dragging {
         cursor: grabbing;
     }
 
 
-    /* =====================================================
-       GRILLE TRÈS DISCRÈTE
-    ===================================================== */
+    /* grille technique très légère */
 
-    .history-dial-shell::after {
+    .history-ruler-viewport::before {
         content: "";
 
         position: absolute;
+
         inset: 0;
 
         z-index: 0;
@@ -171,72 +149,233 @@
 
         background-image:
             linear-gradient(
-                rgba(17, 27, 32, 0.028) 1px,
+                rgba(17, 27, 32, 0.035) 1px,
                 transparent 1px
             ),
             linear-gradient(
                 90deg,
-                rgba(17, 27, 32, 0.028) 1px,
+                rgba(17, 27, 32, 0.035) 1px,
                 transparent 1px
             );
 
         background-size:
-            38px
-            38px;
-
-        mask-image:
-            linear-gradient(
-                to bottom,
-                black,
-                transparent
-            );
+            54px
+            54px;
     }
 
 
     /* =====================================================
-       ROTOR
-    ===================================================== */
+       RAIL MOBILE
+    ====================================================== */
 
-    .history-dial-rotor {
+    .history-ruler-track {
+        height: 100%;
+
         position: absolute;
-        inset: 0;
+
+        top: 0;
+        left: 0;
 
         z-index: 2;
+
+        will-change: transform;
+
+        transition:
+            transform
+            0.52s
+            var(--ease);
+    }
+
+
+    .history-ruler-viewport.is-dragging
+    .history-ruler-track {
+        transition: none;
     }
 
 
     /* =====================================================
-       REPÈRE FIXE
-    ===================================================== */
+       LIGNE DE RÈGLE
+    ====================================================== */
 
-    .history-dial-index {
-        width: 28px;
-        height: 38px;
+    .history-ruler-baseline {
+        height: 1px;
 
         position: absolute;
 
-        left: 50%;
-        bottom: 13px;
+        top: 82px;
 
-        z-index: 5;
+        background:
+            rgba(17, 27, 32, 0.34);
+    }
 
-        pointer-events: none;
+
+    /* =====================================================
+       PETITES GRADUATIONS
+    ====================================================== */
+
+    .history-ruler-minor {
+        width: 1px;
+
+        height: 10px;
+
+        position: absolute;
+
+        top: 82px;
+
+        background:
+            rgba(17, 27, 32, 0.24);
 
         transform:
             translateX(-50%);
     }
 
 
-    .history-dial-index::before {
+    .history-ruler-minor.is-medium {
+        height: 17px;
+
+        background:
+            rgba(17, 27, 32, 0.32);
+    }
+
+
+    /* =====================================================
+       DATES
+    ====================================================== */
+
+    .history-ruler-year {
+        width: 82px;
+
+        padding: 0;
+
+        position: absolute;
+
+        top: 29px;
+
+        transform:
+            translateX(-50%);
+
+        border: 0;
+
+        background: transparent;
+
+        text-align: center;
+
+        font-family:
+            "Barlow Condensed",
+            sans-serif;
+
+        color:
+            rgba(17, 27, 32, 0.30);
+
+        cursor: pointer;
+
+        -webkit-tap-highlight-color:
+            transparent;
+
+        transition:
+            color
+            0.28s
+            ease,
+            opacity
+            0.28s
+            ease,
+            transform
+            0.38s
+            var(--ease);
+    }
+
+
+    .history-ruler-year-label {
+        display: block;
+
+        font-size: 1.42rem;
+        font-weight: 600;
+
+        line-height: 1;
+
+        white-space: nowrap;
+    }
+
+
+    /* grande graduation */
+
+    .history-ruler-year::after {
         content: "";
 
         width: 1px;
-        height: 24px;
+        height: 27px;
+
+        position: absolute;
+
+        top: 53px;
+        left: 50%;
+
+        background:
+            rgba(17, 27, 32, 0.32);
+
+        transform:
+            translateX(-50%);
+
+        transition:
+            height
+            0.3s
+            ease,
+            background
+            0.3s
+            ease;
+    }
+
+
+    /* date actuellement sélectionnée */
+
+    .history-ruler-year.is-active {
+        color: var(--signal);
+
+        transform:
+            translateX(-50%)
+            translateY(-3px);
+    }
+
+
+    .history-ruler-year.is-active
+    .history-ruler-year-label {
+        font-size: 1.72rem;
+    }
+
+
+    .history-ruler-year.is-active::after {
+        height: 38px;
+
+        background:
+            var(--signal);
+    }
+
+
+    /* date la plus proche pendant le drag */
+
+    .history-ruler-year.is-preview:not(.is-active) {
+        color:
+            rgba(17, 27, 32, 0.70);
+    }
+
+
+    /* =====================================================
+       CURSEUR CENTRAL FIXE
+    ====================================================== */
+
+    .history-ruler-index {
+        width: 2px;
+
+        height: 50px;
 
         position: absolute;
 
         left: 50%;
-        bottom: 0;
+        top: 81px;
+
+        z-index: 6;
+
+        pointer-events: none;
 
         background:
             var(--signal);
@@ -246,16 +385,16 @@
     }
 
 
-    .history-dial-index::after {
+    .history-ruler-index::before {
         content: "";
 
-        width: 8px;
-        height: 8px;
+        width: 12px;
+        height: 12px;
 
         position: absolute;
 
         left: 50%;
-        bottom: 22px;
+        top: -5px;
 
         background:
             var(--signal);
@@ -266,171 +405,99 @@
     }
 
 
-    /* =====================================================
-       DATES
-    ===================================================== */
+    /*
+       Petit repère central inférieur.
+       Ça donne l'impression d'un outil de mesure,
+       pas d'un carousel classique.
+    */
 
-    .history-dial-step {
-        padding: 8px;
+    .history-ruler-index::after {
+        content: "";
+
+        width: 34px;
+        height: 2px;
 
         position: absolute;
 
-        border: 0;
-
-        display: flex;
-
-        flex-direction: column;
-
-        align-items: center;
-
-        gap: 8px;
+        left: 50%;
+        bottom: -1px;
 
         background:
-            transparent;
-
-        cursor: pointer;
-
-        white-space: nowrap;
+            var(--signal);
 
         transform:
-            translate(-50%, -50%);
-
-        opacity: 0;
-
-        transition:
-            opacity
-            0.18s
-            ease;
-
-        -webkit-tap-highlight-color:
-            transparent;
-    }
-
-
-    .history-dial-step-year {
-        font-family:
-            "Barlow Condensed",
-            sans-serif;
-
-        font-size: 1.25rem;
-        font-weight: 600;
-
-        line-height: 1;
-
-        letter-spacing:
-            -0.02em;
-
-        color:
-            rgba(17, 27, 32, 0.48);
-
-        transition:
-            color
-            0.2s
-            ease;
-    }
-
-
-    /* graduation */
-
-    .history-dial-step-marker {
-        width: 1px;
-        height: 16px;
-
-        display: block;
-
-        background:
-            rgba(17, 27, 32, 0.3);
-
-        transition:
-            height
-            0.2s
-            ease,
-            background
-            0.2s
-            ease;
+            translateX(-50%);
     }
 
 
     /* =====================================================
-       DATE CENTRALE / ACTIVE
-    ===================================================== */
+       FADES LATÉRAUX
+    ====================================================== */
 
-    .history-dial-step.is-preview
-    .history-dial-step-year {
-        color:
-            var(--signal);
-    }
-
-
-    .history-dial-step.is-preview
-    .history-dial-step-marker {
-        height: 23px;
-
-        background:
-            var(--signal);
-    }
-
-
-    /* =====================================================
-       MASQUES LATÉRAUX
-    ===================================================== */
-
-    .history-dial-fade {
-        width: 70px;
+    .history-ruler-fade {
+        width: 15%;
 
         position: absolute;
 
         top: 0;
         bottom: 0;
 
-        z-index: 4;
+        z-index: 5;
 
         pointer-events: none;
     }
 
 
-    .history-dial-fade-left {
+    .history-ruler-fade-left {
         left: 0;
 
         background:
             linear-gradient(
                 to right,
-                var(--concrete-light),
-                transparent
+                var(--concrete-light) 5%,
+                rgba(236, 233, 225, 0)
             );
     }
 
 
-    .history-dial-fade-right {
+    .history-ruler-fade-right {
         right: 0;
 
         background:
             linear-gradient(
                 to left,
-                var(--concrete-light),
-                transparent
+                var(--concrete-light) 5%,
+                rgba(236, 233, 225, 0)
             );
     }
 
 
     /* =====================================================
-       HINT
-    ===================================================== */
+       FOOTER / INSTRUCTION
+    ====================================================== */
 
-    .history-dial-hint {
-        margin-top: 12px;
+    .history-ruler-footer {
+        min-height: 36px;
 
-        text-align: center;
+        display: flex;
 
-        font-size: 0.44rem;
+        align-items: center;
+
+        justify-content: center;
+
+        border-top:
+            1px solid
+            rgba(17, 27, 32, 0.12);
+
+        font-size: 0.42rem;
         font-weight: 600;
 
-        letter-spacing: 0.14em;
+        letter-spacing: 0.15em;
 
         text-transform: uppercase;
 
         color:
-            rgba(17, 27, 32, 0.34);
+            rgba(17, 27, 32, 0.32);
     }
 
 }
@@ -442,73 +509,92 @@
 
 @media (max-width: 650px) {
 
-    .history-dial {
-        width: 100%;
-
-        margin-top: 22px;
+    .history-ruler {
+        margin-top: 24px;
     }
 
 
-    .history-dial-header {
-        margin-bottom: 7px;
+    .history-ruler-header {
+        min-height: 36px;
 
-        font-size: 0.42rem;
+        font-size: 0.43rem;
+
+        letter-spacing: 0.13em;
     }
 
 
-    .history-dial-shell {
-        height: 170px;
-
-        border-radius:
-            0
-            0
-            50%
-            50%
-            /
-            0
-            0
-            90%
-            90%;
+    .history-ruler-header {
+        gap: 10px;
     }
 
 
-    .history-dial-step {
-        gap: 6px;
-
-        padding: 6px;
+    .history-ruler-viewport {
+        height: 138px;
     }
 
 
-    .history-dial-step-year {
-        font-size: 1.05rem;
+    .history-ruler-baseline {
+        top: 75px;
     }
 
 
-    .history-dial-step-marker {
-        height: 12px;
+    .history-ruler-minor {
+        top: 75px;
     }
 
 
-    .history-dial-step.is-preview
-    .history-dial-step-marker {
-        height: 18px;
+    .history-ruler-year {
+        width: 70px;
+
+        top: 26px;
     }
 
 
-    .history-dial-index {
-        bottom: 8px;
+    .history-ruler-year-label {
+        font-size: 1.25rem;
     }
 
 
-    .history-dial-fade {
-        width: 38px;
+    .history-ruler-year.is-active
+    .history-ruler-year-label {
+        font-size: 1.55rem;
     }
 
 
-    .history-dial-hint {
-        margin-top: 10px;
+    .history-ruler-year::after {
+        top: 48px;
+    }
 
-        font-size: 0.4rem;
+
+    .history-ruler-index {
+        top: 74px;
+
+        height: 46px;
+    }
+
+
+    .history-ruler-footer {
+        min-height: 34px;
+
+        font-size: 0.39rem;
+    }
+
+}
+
+
+/* =========================================================
+   TRÈS PETIT MOBILE
+========================================================= */
+
+@media (max-width: 420px) {
+
+    .history-ruler-header-title {
+        font-size: 0.39rem;
+    }
+
+
+    .history-ruler-fade {
+        width: 11%;
     }
 
 }
@@ -520,8 +606,9 @@
 
 @media (prefers-reduced-motion: reduce) {
 
-    .history-dial-step {
-        transition: none;
+    .history-ruler-track,
+    .history-ruler-year {
+        transition: none !important;
     }
 
 }

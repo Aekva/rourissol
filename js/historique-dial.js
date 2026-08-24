@@ -1,6 +1,11 @@
 /* =========================================================
-   ROURISSOL — HISTORIQUE DIAL
-   TABLETTE + MOBILE
+   ROURISSOL — HISTORIQUE
+   RÈGLE GRADUÉE TABLETTE / MOBILE
+
+   IMPORTANT :
+   - ne modifie pas historique.js
+   - utilise les dates générées par historique.js
+   - remplace uniquement l'ancien rapporteur responsive
 ========================================================= */
 
 (() => {
@@ -11,96 +16,178 @@
         );
 
 
+    const section =
+        document.querySelector(
+            ".history-showcase"
+        );
+
+
+    if (!section) {
+        return;
+    }
+
+
     /* =====================================================
-       INIT
-    ===================================================== */
+       HELPERS
+    ====================================================== */
 
-    function initHistoryDial(
-        attempt = 0
-    ) {
+    const clamp = (
+        value,
+        min,
+        max
+    ) => {
 
-        const section =
-            document.querySelector(
-                ".history-showcase"
-            );
+        return Math.min(
+            Math.max(
+                value,
+                min
+            ),
+            max
+        );
 
-
-        if (!section) {
-            return;
-        }
-
-
-        const timeline =
-            section.querySelector(
-                ".history-timeline-wrapper"
-            );
+    };
 
 
-        const datesContainer =
-            section.querySelector(
-                ".history-timeline-dates"
-            );
+    /* =====================================================
+       STATE
+    ====================================================== */
+
+    let ruler = null;
+
+    let viewport = null;
+
+    let track = null;
 
 
-        const dateButtons =
-            datesContainer
-                ? [
-                    ...datesContainer.querySelectorAll(
-                        ".history-date"
+    let dateButtons = [];
+
+    let rulerYears = [];
+
+
+    let activeIndex = 0;
+
+    let visualIndex = 0;
+
+
+    let step = 120;
+
+    let sidePadding = 0;
+
+
+    let currentTranslate = 0;
+
+
+    let dragging = false;
+
+    let dragMoved = false;
+
+    let pointerId = null;
+
+
+    let startX = 0;
+
+    let startTranslate = 0;
+
+
+    let autoplayLocked = false;
+
+    let observer = null;
+
+
+    /* =====================================================
+       GET HISTORY BUTTONS
+    ====================================================== */
+
+    function getDateButtons() {
+
+        return [
+            ...section.querySelectorAll(
+                ".history-date"
+            )
+        ];
+
+    }
+
+
+    /* =====================================================
+       GET ACTIVE INDEX
+    ====================================================== */
+
+    function getActiveIndex() {
+
+        const index =
+            dateButtons.findIndex(
+                button =>
+                    button.classList.contains(
+                        "is-active"
                     )
-                ]
-                : [];
+            );
 
 
-        /*
-           historique.js génère les dates dynamiquement.
+        return index >= 0
+            ? index
+            : 0;
 
-           Si jamais ce fichier est exécuté quelques ms
-           trop tôt, on attend simplement.
-        */
+    }
+
+
+    /* =====================================================
+       STOP AUTOPLAY
+    ====================================================== */
+
+    function lockAutoplay() {
 
         if (
-            !timeline
+            autoplayLocked
             ||
             !dateButtons.length
         ) {
-
-            if (attempt < 40) {
-
-                setTimeout(
-                    () => {
-
-                        initHistoryDial(
-                            attempt + 1
-                        );
-
-                    },
-
-                    50
-                );
-
-            }
-
             return;
         }
 
 
+        autoplayLocked = true;
+
+
+        const index =
+            getActiveIndex();
+
+
         /*
-           Évite de créer deux fois le rapporteur.
+           On clique sur la date déjà active.
+
+           historique.js garde donc toute la responsabilité
+           de l'arrêt de l'autoplay / verrouillage utilisateur.
         */
 
+        dateButtons[index]?.click();
+
+    }
+
+
+    /* =====================================================
+       BUILD RULER
+    ====================================================== */
+
+    function buildRuler() {
+
         if (
-            section.querySelector(
-                ".history-dial"
-            )
+            ruler
+            ||
+            !BREAKPOINT.matches
         ) {
             return;
         }
 
 
-        /* =================================================
-           YEARS
-        ================================================= */
+        dateButtons =
+            getDateButtons();
+
+
+        if (!dateButtons.length) {
+            return;
+        }
+
 
         const years =
             dateButtons.map(
@@ -111,109 +198,146 @@
                             ".history-date-year"
                         );
 
-                    return year
-                        ? year.textContent.trim()
-                        : "";
+
+                    return (
+                        year?.textContent?.trim()
+                        ||
+                        ""
+                    );
 
                 }
             );
 
 
         /* =================================================
-           CREATE DIAL
+           ROOT
         ================================================= */
 
-        const dial =
+        ruler =
             document.createElement(
                 "div"
             );
 
 
-        dial.className =
-            "history-dial";
+        ruler.className =
+            "history-ruler";
 
 
-        dial.setAttribute(
+        ruler.setAttribute(
+            "role",
+            "group"
+        );
+
+
+        ruler.setAttribute(
             "aria-label",
             "Chronologie interactive Rourissol"
         );
 
 
-        dial.innerHTML = `
-            <div class="history-dial-header">
+        /* =================================================
+           STRUCTURE
+        ================================================= */
 
-                <span>
+        ruler.innerHTML = `
+
+            <div class="history-ruler-header">
+
+                <span class="history-ruler-header-start">
                     ${years[0]}
                 </span>
 
-                <span>
+                <span class="history-ruler-header-title">
                     Chronologie
                 </span>
 
-                <span>
+                <span class="history-ruler-header-end">
                     ${years[years.length - 1]}
                 </span>
 
             </div>
 
-            <div class="history-dial-shell">
+
+            <div class="history-ruler-viewport">
 
                 <div
                     class="
-                        history-dial-fade
-                        history-dial-fade-left
+                        history-ruler-fade
+                        history-ruler-fade-left
                     "
                     aria-hidden="true"
                 ></div>
 
+
                 <div
                     class="
-                        history-dial-fade
-                        history-dial-fade-right
+                        history-ruler-fade
+                        history-ruler-fade-right
                     "
                     aria-hidden="true"
                 ></div>
 
-                <div
-                    class="history-dial-rotor"
-                ></div>
 
-                <div
-                    class="history-dial-index"
+                <div class="history-ruler-track">
+
+                    <span
+                        class="history-ruler-baseline"
+                        aria-hidden="true"
+                    ></span>
+
+                </div>
+
+
+                <span
+                    class="history-ruler-index"
                     aria-hidden="true"
-                ></div>
+                ></span>
 
             </div>
 
-            <div class="history-dial-hint">
+
+            <div class="history-ruler-footer">
                 Glisser pour parcourir
             </div>
+
         `;
+
+
+        /* =================================================
+           INSERTION
+
+           Même emplacement que l'ancien rapporteur.
+        ================================================= */
+
+        const timeline =
+            section.querySelector(
+                ".history-timeline-wrapper"
+            );
 
 
         timeline.insertAdjacentElement(
             "afterend",
-            dial
+            ruler
         );
 
 
-        const shell =
-            dial.querySelector(
-                ".history-dial-shell"
+        viewport =
+            ruler.querySelector(
+                ".history-ruler-viewport"
             );
 
 
-        const rotor =
-            dial.querySelector(
-                ".history-dial-rotor"
+        track =
+            ruler.querySelector(
+                ".history-ruler-track"
             );
 
 
         /* =================================================
-           CREATE STEPS
+           YEARS
         ================================================= */
 
-        const dialSteps =
+        rulerYears =
             years.map(
                 (year, index) => {
 
@@ -228,11 +352,11 @@
 
 
                     button.className =
-                        "history-dial-step";
+                        "history-ruler-year";
 
 
                     button.dataset.index =
-                        index;
+                        String(index);
 
 
                     button.setAttribute(
@@ -242,20 +366,35 @@
 
 
                     button.innerHTML = `
-                        <span
-                            class="history-dial-step-year"
-                        >
+
+                        <span class="history-ruler-year-label">
                             ${year}
                         </span>
 
-                        <span
-                            class="history-dial-step-marker"
-                            aria-hidden="true"
-                        ></span>
                     `;
 
 
-                    rotor.appendChild(
+                    button.addEventListener(
+                        "click",
+                        () => {
+
+                            if (dragMoved) {
+                                return;
+                            }
+
+
+                            lockAutoplay();
+
+
+                            selectIndex(
+                                index
+                            );
+
+                        }
+                    );
+
+
+                    track.appendChild(
                         button
                     );
 
@@ -267,859 +406,38 @@
 
 
         /* =================================================
-           STATE
+           POINTER
         ================================================= */
 
-        let visualValue = 0;
-
-        let dragging = false;
-
-        let pointerId = null;
-
-        let startX = 0;
-
-        let startValue = 0;
-
-        let dragMoved = false;
-
-        let startTarget = null;
-
-        let animationFrame = null;
-
-        let autoplayLockedByDial =
-            false;
-
-        let lastObservedIndex =
-            -1;
-
-
-        /* =================================================
-           HELPERS
-        ================================================= */
-
-        function clamp(
-            value,
-            min,
-            max
-        ) {
-
-            return Math.max(
-                min,
-                Math.min(
-                    max,
-                    value
-                )
-            );
-
-        }
-
-
-        function getActiveIndex() {
-
-            const index =
-                dateButtons.findIndex(
-                    button =>
-                        button.classList.contains(
-                            "is-active"
-                        )
-                );
-
-
-            return index >= 0
-                ? index
-                : 0;
-
-        }
-
-
-        /* =================================================
-           RENDER RAPPORTEUR
-        ================================================= */
-
-        function renderDial(
-            value
-        ) {
-
-            visualValue =
-                clamp(
-                    value,
-                    0,
-                    dialSteps.length - 1
-                );
-
-
-            const width =
-                shell.clientWidth;
-
-
-            const height =
-                shell.clientHeight;
-
-
-            if (
-                width === 0
-                ||
-                height === 0
-            ) {
-                return;
-            }
-
-
-            /*
-               Ellipse correspondant à notre
-               rapporteur aplati.
-            */
-
-            const radiusX =
-                width * 0.43;
-
-
-            const radiusY =
-                height * 0.56;
-
-
-            const centerX =
-                width / 2;
-
-
-            const centerY =
-                height * 0.12;
-
-
-            /*
-               90° = point central inférieur.
-
-               C'est ici que vient se placer
-               la date actuellement sélectionnée.
-            */
-
-            const angleStep =
-                width <= 500
-                    ? 25
-                    : 22;
-
-
-            const nearestIndex =
-                clamp(
-                    Math.round(
-                        visualValue
-                    ),
-                    0,
-                    dialSteps.length - 1
-                );
-
-
-            dialSteps.forEach(
-                (step, index) => {
-
-                    const offset =
-                        index - visualValue;
-
-
-                    const distance =
-                        Math.abs(
-                            offset
-                        );
-
-
-                    /*
-                       Seulement 3 à 5 dates réellement
-                       perceptibles en même temps.
-                    */
-
-                    if (
-                        distance > 2.75
-                    ) {
-
-                        step.style.opacity =
-                            "0";
-
-
-                        step.style.pointerEvents =
-                            "none";
-
-
-                        return;
-
-                    }
-
-
-                    step.style.pointerEvents =
-                        "auto";
-
-
-                    const angle =
-                        90
-                        +
-                        (
-                            offset
-                            *
-                            angleStep
-                        );
-
-
-                    const radians =
-                        angle
-                        *
-                        Math.PI
-                        /
-                        180;
-
-
-                    const x =
-                        centerX
-                        +
-                        Math.cos(
-                            radians
-                        )
-                        *
-                        radiusX;
-
-
-                    const y =
-                        centerY
-                        +
-                        Math.sin(
-                            radians
-                        )
-                        *
-                        radiusY;
-
-
-                    /*
-                       Plus une date s'éloigne,
-                       plus elle disparaît.
-                    */
-
-                    const opacity =
-                        Math.max(
-                            0,
-                            1
-                            -
-                            (
-                                distance
-                                *
-                                0.29
-                            )
-                        );
-
-
-                    let scale;
-
-
-                    if (
-                        distance < 0.35
-                    ) {
-
-                        scale = 1.17;
-
-                    } else if (
-                        distance < 1.25
-                    ) {
-
-                        scale = 0.96;
-
-                    } else {
-
-                        scale = 0.78;
-
-                    }
-
-
-                    step.style.left =
-                        `${x}px`;
-
-
-                    step.style.top =
-                        `${y}px`;
-
-
-                    step.style.opacity =
-                        `${opacity}`;
-
-
-                    step.style.transform =
-                        `
-                            translate(
-                                -50%,
-                                -50%
-                            )
-                            scale(
-                                ${scale}
-                            )
-                        `;
-
-
-                    step.style.zIndex =
-                        `${100 - Math.round(distance * 10)}`;
-
-
-                    step.classList.toggle(
-                        "is-preview",
-                        index === nearestIndex
-                    );
-
-                }
-            );
-
-        }
-
-
-        /* =================================================
-           ANIMATE ROTATION
-        ================================================= */
-
-        function animateDialTo(
-            target,
-            duration = 480
-        ) {
-
-            cancelAnimationFrame(
-                animationFrame
-            );
-
-
-            const start =
-                visualValue;
-
-
-            const difference =
-                target - start;
-
-
-            /*
-               Rien à animer.
-            */
-
-            if (
-                Math.abs(
-                    difference
-                )
-                <
-                0.001
-            ) {
-
-                renderDial(
-                    target
-                );
-
-                return;
-
-            }
-
-
-            const startTime =
-                performance.now();
-
-
-            function frame(
-                now
-            ) {
-
-                const elapsed =
-                    now - startTime;
-
-
-                const progress =
-                    Math.min(
-                        1,
-                        elapsed / duration
-                    );
-
-
-                /*
-                   easeOutCubic
-                */
-
-                const eased =
-                    1
-                    -
-                    Math.pow(
-                        1 - progress,
-                        3
-                    );
-
-
-                renderDial(
-                    start
-                    +
-                    difference
-                    *
-                    eased
-                );
-
-
-                if (
-                    progress < 1
-                ) {
-
-                    animationFrame =
-                        requestAnimationFrame(
-                            frame
-                        );
-
-                }
-
-            }
-
-
-            animationFrame =
-                requestAnimationFrame(
-                    frame
-                );
-
-        }
-
-
-        /* =================================================
-           STOP AUTOPLAY ON FIRST USER TOUCH
-        ================================================= */
-
-        function lockHistoryAutoplay() {
-
-            if (
-                autoplayLockedByDial
-            ) {
-                return;
-            }
-
-
-            autoplayLockedByDial =
-                true;
-
-
-            const currentIndex =
-                getActiveIndex();
-
-
-            /*
-               On utilise le bouton existant.
-
-               historique.js va donc lui-même :
-               - arrêter l'autoplay
-               - verrouiller la sélection
-               - conserver toute sa logique
-            */
-
-            dateButtons[
-                currentIndex
-            ]?.click();
-
-        }
-
-
-        /* =================================================
-           SELECT HISTORY DATE
-        ================================================= */
-
-        function selectIndex(
-            index
-        ) {
-
-            const safeIndex =
-                clamp(
-                    index,
-                    0,
-                    dateButtons.length - 1
-                );
-
-
-            const currentIndex =
-                getActiveIndex();
-
-
-            animateDialTo(
-                safeIndex,
-                300
-            );
-
-
-            if (
-                safeIndex
-                !==
-                currentIndex
-            ) {
-
-                dateButtons[
-                    safeIndex
-                ]?.click();
-
-            }
-
-        }
-
-
-        /* =================================================
-           POINTER DOWN
-        ================================================= */
-
-        shell.addEventListener(
+        viewport.addEventListener(
             "pointerdown",
-            event => {
-
-                if (
-                    !BREAKPOINT.matches
-                ) {
-                    return;
-                }
-
-
-                if (
-                    event.button !== undefined
-                    &&
-                    event.button !== 0
-                ) {
-                    return;
-                }
-
-
-                lockHistoryAutoplay();
-
-
-                cancelAnimationFrame(
-                    animationFrame
-                );
-
-
-                dragging =
-                    true;
-
-
-                dragMoved =
-                    false;
-
-
-                pointerId =
-                    event.pointerId;
-
-
-                startX =
-                    event.clientX;
-
-
-                startValue =
-                    visualValue;
-
-
-                startTarget =
-                    event.target.closest(
-                        ".history-dial-step"
-                    );
-
-
-                dial.classList.add(
-                    "is-dragging"
-                );
-
-
-                shell.setPointerCapture?.(
-                    event.pointerId
-                );
-
-            }
+            pointerDown
         );
 
 
-        /* =================================================
-           POINTER MOVE
-        ================================================= */
-
-        shell.addEventListener(
+        viewport.addEventListener(
             "pointermove",
-            event => {
-
-                if (
-                    !dragging
-                    ||
-                    event.pointerId
-                    !==
-                    pointerId
-                ) {
-                    return;
-                }
-
-
-                const deltaX =
-                    event.clientX
-                    -
-                    startX;
-
-
-                if (
-                    Math.abs(
-                        deltaX
-                    )
-                    >
-                    4
-                ) {
-
-                    dragMoved =
-                        true;
-
-                }
-
-
-                /*
-                   Largeur d'un cran.
-
-                   Automatiquement adaptée à
-                   tablette / téléphone.
-                */
-
-                const pixelsPerStep =
-                    clamp(
-                        shell.clientWidth
-                        /
-                        5.1,
-                        68,
-                        120
-                    );
-
-
-                /*
-                   Drag gauche =
-                   avancer dans le temps.
-                */
-
-                const value =
-                    startValue
-                    -
-                    (
-                        deltaX
-                        /
-                        pixelsPerStep
-                    );
-
-
-                renderDial(
-                    clamp(
-                        value,
-                        0,
-                        dateButtons.length - 1
-                    )
-                );
-
-            }
+            pointerMove
         );
 
 
-        /* =================================================
-           END DRAG
-        ================================================= */
-
-        function finishDrag(
-            event,
-            cancelled = false
-        ) {
-
-            if (
-                !dragging
-                ||
-                event.pointerId
-                !==
-                pointerId
-            ) {
-                return;
-            }
-
-
-            dragging =
-                false;
-
-
-            dial.classList.remove(
-                "is-dragging"
-            );
-
-
-            shell.releasePointerCapture?.(
-                event.pointerId
-            );
-
-
-            /*
-               Si on a simplement tapé directement
-               sur une date, on sélectionne celle-ci.
-            */
-
-            if (
-                !cancelled
-                &&
-                !dragMoved
-                &&
-                startTarget
-            ) {
-
-                const tappedIndex =
-                    Number(
-                        startTarget.dataset.index
-                    );
-
-
-                selectIndex(
-                    tappedIndex
-                );
-
-
-            } else if (
-                !cancelled
-            ) {
-
-                /*
-                   Snap magnétique sur
-                   le cran le plus proche.
-                */
-
-                const snappedIndex =
-                    clamp(
-                        Math.round(
-                            visualValue
-                        ),
-                        0,
-                        dateButtons.length - 1
-                    );
-
-
-                selectIndex(
-                    snappedIndex
-                );
-
-
-            } else {
-
-                /*
-                   Scroll vertical / interruption :
-                   retour à la vraie date active.
-                */
-
-                animateDialTo(
-                    getActiveIndex(),
-                    250
-                );
-
-            }
-
-
-            pointerId =
-                null;
-
-
-            startTarget =
-                null;
-
-        }
-
-
-        shell.addEventListener(
+        viewport.addEventListener(
             "pointerup",
-            event => {
-
-                finishDrag(
-                    event
-                );
-
-            }
+            pointerUp
         );
 
 
-        shell.addEventListener(
+        viewport.addEventListener(
             "pointercancel",
-            event => {
-
-                finishDrag(
-                    event,
-                    true
-                );
-
-            }
+            pointerCancel
         );
 
 
         /* =================================================
-           CLAVIER
+           OBSERVER historique.js
         ================================================= */
 
-        dialSteps.forEach(
-            (step, index) => {
-
-                step.addEventListener(
-                    "keydown",
-                    event => {
-
-                        if (
-                            event.key
-                            !==
-                            "Enter"
-                            &&
-                            event.key
-                            !==
-                            " "
-                        ) {
-                            return;
-                        }
-
-
-                        event.preventDefault();
-
-
-                        lockHistoryAutoplay();
-
-
-                        selectIndex(
-                            index
-                        );
-
-                    }
-                );
-
-            }
-        );
-
-
-        /* =================================================
-           SYNCHRO AVEC historique.js
-        ================================================= */
-
-        function syncFromHistory() {
-
-            const activeIndex =
-                getActiveIndex();
-
-
-            if (
-                activeIndex
-                ===
-                lastObservedIndex
-            ) {
-                return;
-            }
-
-
-            lastObservedIndex =
-                activeIndex;
-
-
-            if (
-                dragging
-            ) {
-                return;
-            }
-
-
-            /*
-               Quand l'autoplay desktop change
-               la date, le rapporteur tourne aussi.
-            */
-
-            animateDialTo(
-                activeIndex,
-                520
-            );
-
-        }
-
-
-        const observer =
+        observer =
             new MutationObserver(
                 syncFromHistory
             );
@@ -1131,8 +449,7 @@
                 observer.observe(
                     button,
                     {
-                        attributes:
-                            true,
+                        attributes: true,
 
                         attributeFilter: [
                             "class"
@@ -1145,54 +462,25 @@
 
 
         /* =================================================
-           RESIZE
-        ================================================= */
-
-        window.addEventListener(
-            "resize",
-            () => {
-
-                renderDial(
-                    getActiveIndex()
-                );
-
-            }
-        );
-
-
-        BREAKPOINT.addEventListener?.(
-            "change",
-            () => {
-
-                renderDial(
-                    getActiveIndex()
-                );
-
-            }
-        );
-
-
-        /* =================================================
            INITIAL STATE
         ================================================= */
 
-        const initialIndex =
+        activeIndex =
             getActiveIndex();
 
 
-        lastObservedIndex =
-            initialIndex;
-
-
-        visualValue =
-            initialIndex;
+        visualIndex =
+            activeIndex;
 
 
         requestAnimationFrame(
             () => {
 
-                renderDial(
-                    initialIndex
+                measure();
+
+                goToIndex(
+                    activeIndex,
+                    false
                 );
 
             }
@@ -1202,8 +490,944 @@
 
 
     /* =====================================================
+       MEASURE
+    ====================================================== */
+
+    function measure() {
+
+        if (
+            !viewport
+            ||
+            !track
+        ) {
+            return;
+        }
+
+
+        const width =
+            viewport.clientWidth;
+
+
+        /*
+           Environ 3 à 5 dates perceptibles à l'écran.
+        */
+
+        step =
+            clamp(
+                width * 0.30,
+                112,
+                155
+            );
+
+
+        /*
+           Padding d'une demi-largeur.
+
+           Permet à 1969 ET 2022
+           d'arriver sous le curseur central.
+        */
+
+        sidePadding =
+            width / 2;
+
+
+        const totalWidth =
+            sidePadding
+            *
+            2
+            +
+            step
+            *
+            (
+                dateButtons.length
+                -
+                1
+            );
+
+
+        track.style.width =
+            `${totalWidth}px`;
+
+
+        /* =================================================
+           BASELINE
+        ================================================= */
+
+        const baseline =
+            track.querySelector(
+                ".history-ruler-baseline"
+            );
+
+
+        baseline.style.left =
+            `${sidePadding}px`;
+
+
+        baseline.style.width =
+            `${
+                step
+                *
+                (
+                    dateButtons.length
+                    -
+                    1
+                )
+            }px`;
+
+
+        /* =================================================
+           POSITION YEARS
+        ================================================= */
+
+        rulerYears.forEach(
+            (element, index) => {
+
+                const x =
+                    sidePadding
+                    +
+                    index
+                    *
+                    step;
+
+
+                element.style.left =
+                    `${x}px`;
+
+            }
+        );
+
+
+        /* =================================================
+           REMOVE OLD MINOR TICKS
+        ================================================= */
+
+        track
+            .querySelectorAll(
+                ".history-ruler-minor"
+            )
+            .forEach(
+                tick =>
+                    tick.remove()
+            );
+
+
+        /* =================================================
+           GRADUATIONS
+
+           4 petites graduations
+           entre chaque grande date.
+        ================================================= */
+
+        const subdivisions = 5;
+
+
+        for (
+            let index = 0;
+            index < dateButtons.length - 1;
+            index++
+        ) {
+
+            for (
+                let division = 1;
+                division < subdivisions;
+                division++
+            ) {
+
+                const tick =
+                    document.createElement(
+                        "span"
+                    );
+
+
+                tick.className =
+                    "history-ruler-minor";
+
+
+                if (division === 3) {
+
+                    tick.classList.add(
+                        "is-medium"
+                    );
+
+                }
+
+
+                const x =
+                    sidePadding
+                    +
+                    index
+                    *
+                    step
+                    +
+                    (
+                        division
+                        /
+                        subdivisions
+                    )
+                    *
+                    step;
+
+
+                tick.style.left =
+                    `${x}px`;
+
+
+                tick.setAttribute(
+                    "aria-hidden",
+                    "true"
+                );
+
+
+                track.appendChild(
+                    tick
+                );
+
+            }
+
+        }
+
+
+        goToIndex(
+            visualIndex,
+            false
+        );
+
+    }
+
+
+    /* =====================================================
+       TRANSLATE FOR INDEX
+    ====================================================== */
+
+    function translateForIndex(
+        index
+    ) {
+
+        const center =
+            viewport.clientWidth
+            /
+            2;
+
+
+        const position =
+            sidePadding
+            +
+            index
+            *
+            step;
+
+
+        return (
+            center
+            -
+            position
+        );
+
+    }
+
+
+    /* =====================================================
+       INDEX FROM TRANSLATE
+    ====================================================== */
+
+    function indexFromTranslate(
+        translate
+    ) {
+
+        const center =
+            viewport.clientWidth
+            /
+            2;
+
+
+        const position =
+            center
+            -
+            translate;
+
+
+        const index =
+            (
+                position
+                -
+                sidePadding
+            )
+            /
+            step;
+
+
+        return clamp(
+            index,
+            0,
+            dateButtons.length - 1
+        );
+
+    }
+
+
+    /* =====================================================
+       SET TRANSLATE
+    ====================================================== */
+
+    function setTranslate(
+        value
+    ) {
+
+        currentTranslate =
+            value;
+
+
+        track.style.transform =
+            `translate3d(${value}px, 0, 0)`;
+
+    }
+
+
+    /* =====================================================
+       MOVE TO INDEX
+    ====================================================== */
+
+    function goToIndex(
+        index,
+        animated = true
+    ) {
+
+        if (
+            !track
+            ||
+            !viewport
+        ) {
+            return;
+        }
+
+
+        const safeIndex =
+            clamp(
+                index,
+                0,
+                dateButtons.length - 1
+            );
+
+
+        visualIndex =
+            safeIndex;
+
+
+        if (animated) {
+
+            viewport.classList.remove(
+                "is-dragging"
+            );
+
+        }
+
+
+        setTranslate(
+            translateForIndex(
+                safeIndex
+            )
+        );
+
+
+        updateStates(
+            safeIndex
+        );
+
+    }
+
+
+    /* =====================================================
+       STATES / OPACITY
+    ====================================================== */
+
+    function updateStates(
+        previewIndex
+    ) {
+
+        const nearest =
+            Math.round(
+                previewIndex
+            );
+
+
+        rulerYears.forEach(
+            (element, index) => {
+
+                element.classList.toggle(
+                    "is-active",
+                    index === activeIndex
+                );
+
+
+                element.classList.toggle(
+                    "is-preview",
+                    index === nearest
+                );
+
+
+                const distance =
+                    Math.abs(
+                        index
+                        -
+                        previewIndex
+                    );
+
+
+                let opacity = 1;
+
+
+                if (distance > 2.5) {
+
+                    opacity = 0.08;
+
+                } else if (
+                    distance > 1.75
+                ) {
+
+                    opacity = 0.22;
+
+                } else if (
+                    distance > 0.9
+                ) {
+
+                    opacity = 0.5;
+
+                }
+
+
+                element.style.opacity =
+                    String(opacity);
+
+            }
+        );
+
+    }
+
+
+    /* =====================================================
+       SELECT INDEX
+    ====================================================== */
+
+    function selectIndex(
+        index
+    ) {
+
+        const safeIndex =
+            clamp(
+                Math.round(
+                    index
+                ),
+                0,
+                dateButtons.length - 1
+            );
+
+
+        activeIndex =
+            safeIndex;
+
+
+        visualIndex =
+            safeIndex;
+
+
+        /*
+           On laisse historique.js changer :
+
+           - photo
+           - titre
+           - texte
+           - compteur
+           - transition
+        */
+
+        dateButtons[
+            safeIndex
+        ]?.click();
+
+
+        goToIndex(
+            safeIndex,
+            true
+        );
+
+    }
+
+
+    /* =====================================================
+       POINTER DOWN
+    ====================================================== */
+
+    function pointerDown(
+        event
+    ) {
+
+        if (
+            event.pointerType === "mouse"
+            &&
+            event.button !== 0
+        ) {
+            return;
+        }
+
+
+        lockAutoplay();
+
+
+        dragging =
+            true;
+
+
+        dragMoved =
+            false;
+
+
+        pointerId =
+            event.pointerId;
+
+
+        startX =
+            event.clientX;
+
+
+        startTranslate =
+            currentTranslate;
+
+
+        viewport.classList.add(
+            "is-dragging"
+        );
+
+
+        viewport.setPointerCapture?.(
+            pointerId
+        );
+
+    }
+
+
+    /* =====================================================
+       POINTER MOVE
+
+       IMPORTANT :
+
+       doigt vers GAUCHE
+       → règle vers GAUCHE
+       → années PLUS RÉCENTES
+
+       doigt vers DROITE
+       → règle vers DROITE
+       → années PLUS ANCIENNES
+    ====================================================== */
+
+    function pointerMove(
+        event
+    ) {
+
+        if (
+            !dragging
+            ||
+            event.pointerId
+            !==
+            pointerId
+        ) {
+            return;
+        }
+
+
+        const deltaX =
+            event.clientX
+            -
+            startX;
+
+
+        if (
+            Math.abs(
+                deltaX
+            )
+            >
+            5
+        ) {
+
+            dragMoved =
+                true;
+
+        }
+
+
+        /*
+           Le rail suit réellement le doigt.
+        */
+
+        let translate =
+            startTranslate
+            +
+            deltaX;
+
+
+        const maximum =
+            translateForIndex(
+                0
+            );
+
+
+        const minimum =
+            translateForIndex(
+                dateButtons.length
+                -
+                1
+            );
+
+
+        translate =
+            clamp(
+                translate,
+                minimum,
+                maximum
+            );
+
+
+        setTranslate(
+            translate
+        );
+
+
+        visualIndex =
+            indexFromTranslate(
+                translate
+            );
+
+
+        updateStates(
+            visualIndex
+        );
+
+    }
+
+
+    /* =====================================================
+       POINTER UP
+    ====================================================== */
+
+    function pointerUp(
+        event
+    ) {
+
+        if (
+            !dragging
+            ||
+            event.pointerId
+            !==
+            pointerId
+        ) {
+            return;
+        }
+
+
+        dragging =
+            false;
+
+
+        viewport.classList.remove(
+            "is-dragging"
+        );
+
+
+        viewport.releasePointerCapture?.(
+            pointerId
+        );
+
+
+        pointerId =
+            null;
+
+
+        /*
+           Vrai slide :
+           snap sur la date la plus proche.
+        */
+
+        if (dragMoved) {
+
+            const index =
+                Math.round(
+                    visualIndex
+                );
+
+
+            selectIndex(
+                index
+            );
+
+
+            /*
+               Évite qu'un click synthétique mobile
+               sélectionne une deuxième date.
+            */
+
+            setTimeout(
+                () => {
+
+                    dragMoved =
+                        false;
+
+                },
+                80
+            );
+
+
+            return;
+        }
+
+
+        /*
+           Simple tap dans le vide :
+           retour propre sur la date active.
+        */
+
+        goToIndex(
+            activeIndex,
+            true
+        );
+
+    }
+
+
+    /* =====================================================
+       POINTER CANCEL
+    ====================================================== */
+
+    function pointerCancel() {
+
+        if (!dragging) {
+            return;
+        }
+
+
+        dragging =
+            false;
+
+
+        dragMoved =
+            false;
+
+
+        pointerId =
+            null;
+
+
+        viewport.classList.remove(
+            "is-dragging"
+        );
+
+
+        goToIndex(
+            activeIndex,
+            true
+        );
+
+    }
+
+
+    /* =====================================================
+       SYNC AVEC historique.js
+    ====================================================== */
+
+    function syncFromHistory() {
+
+        if (
+            dragging
+            ||
+            !dateButtons.length
+        ) {
+            return;
+        }
+
+
+        const index =
+            getActiveIndex();
+
+
+        if (
+            index
+            ===
+            activeIndex
+        ) {
+            return;
+        }
+
+
+        activeIndex =
+            index;
+
+
+        visualIndex =
+            index;
+
+
+        goToIndex(
+            index,
+            true
+        );
+
+    }
+
+
+    /* =====================================================
+       DESTROY
+    ====================================================== */
+
+    function destroyRuler() {
+
+        if (!ruler) {
+            return;
+        }
+
+
+        observer?.disconnect();
+
+
+        observer =
+            null;
+
+
+        ruler.remove();
+
+
+        ruler =
+            null;
+
+
+        viewport =
+            null;
+
+
+        track =
+            null;
+
+
+        rulerYears =
+            [];
+
+
+        dragging =
+            false;
+
+
+        dragMoved =
+            false;
+
+
+        pointerId =
+            null;
+
+    }
+
+
+    /* =====================================================
+       WAIT FOR historique.js
+    ====================================================== */
+
+    function initWhenReady(
+        attempt = 0
+    ) {
+
+        if (!BREAKPOINT.matches) {
+            return;
+        }
+
+
+        dateButtons =
+            getDateButtons();
+
+
+        if (dateButtons.length) {
+
+            buildRuler();
+
+            return;
+
+        }
+
+
+        if (attempt >= 40) {
+
+            console.warn(
+                "Historique ruler : dates introuvables."
+            );
+
+            return;
+
+        }
+
+
+        setTimeout(
+            () => {
+
+                initWhenReady(
+                    attempt + 1
+                );
+
+            },
+            50
+        );
+
+    }
+
+
+    /* =====================================================
+       BREAKPOINT
+    ====================================================== */
+
+    function handleBreakpoint() {
+
+        if (BREAKPOINT.matches) {
+
+            initWhenReady();
+
+        } else {
+
+            destroyRuler();
+
+        }
+
+    }
+
+
+    BREAKPOINT.addEventListener?.(
+        "change",
+        handleBreakpoint
+    );
+
+
+    /* =====================================================
+       RESIZE
+    ====================================================== */
+
+    window.addEventListener(
+        "resize",
+        () => {
+
+            if (
+                !ruler
+                ||
+                !BREAKPOINT.matches
+            ) {
+                return;
+            }
+
+
+            measure();
+
+        },
+        {
+            passive: true
+        }
+    );
+
+
+    /* =====================================================
        START
-    ===================================================== */
+    ====================================================== */
 
     if (
         document.readyState
@@ -1213,16 +1437,12 @@
 
         document.addEventListener(
             "DOMContentLoaded",
-            () => {
-
-                initHistoryDial();
-
-            }
+            handleBreakpoint
         );
 
     } else {
 
-        initHistoryDial();
+        handleBreakpoint();
 
     }
 
