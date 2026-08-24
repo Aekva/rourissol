@@ -2533,36 +2533,242 @@ span:last-child {
         display: none;
     }
 
-    .opening-top {
-        width:
-            calc(
-                100% - 60px
-            );
+    /* =========================================================
+   OPENING — MOBILE
+========================================================= */
 
-        top: 25px;
-    }
+.opening {
+    width: 100%;
+    height: 100dvh;
 
-    .opening-content {
-        width: 88%;
-    }
+    inset: 0;
 
-    .opening-logo {
-        width:
-            clamp(
-                220px,
-                65vw,
-                380px
-            );
-    }
+    overflow: hidden;
+}
 
-    .opening-meta {
-        font-size: 0.65rem;
-    }
 
-    .opening-coordinates {
-        left: 25px;
-        bottom: 30px;
-    }
+/* grille un peu plus adaptée au téléphone */
+
+.opening-grid {
+    background-size:
+        70px
+        70px;
+}
+
+
+/* =========================================================
+   CORNERS
+========================================================= */
+
+.opening-corner {
+    width: 28px;
+    height: 28px;
+}
+
+
+.opening-corner-tl {
+    top:
+        max(
+            24px,
+            env(safe-area-inset-top)
+        );
+
+    left: 24px;
+}
+
+
+.opening-corner-tr {
+    top:
+        max(
+            24px,
+            env(safe-area-inset-top)
+        );
+
+    right: 24px;
+}
+
+
+.opening-corner-bl {
+    left: 24px;
+
+    bottom:
+        max(
+            24px,
+            env(safe-area-inset-bottom)
+        );
+}
+
+
+.opening-corner-br {
+    right: 24px;
+
+    bottom:
+        max(
+            24px,
+            env(safe-area-inset-bottom)
+        );
+}
+
+
+/* =========================================================
+   TOP
+========================================================= */
+
+.opening-top {
+    width: auto;
+
+    top:
+        max(
+            28px,
+            calc(env(safe-area-inset-top) + 8px)
+        );
+
+    left: 50%;
+
+    justify-content: center;
+
+    transform:
+        translateX(-50%);
+
+    white-space: nowrap;
+
+    font-size: 0.5rem;
+
+    letter-spacing: 0.18em;
+}
+
+
+/*
+   Sur mobile on garde un seul intitulé.
+   Ça évite les deux textes aux extrémités
+   comme sur desktop.
+*/
+
+.opening-top span:last-child {
+    display: none;
+}
+
+
+/* =========================================================
+   CONTENT
+========================================================= */
+
+.opening-content {
+    width:
+        calc(
+            100% - 48px
+        );
+
+    max-width: 420px;
+
+    top: 48%;
+
+    left: 50%;
+
+    transform:
+        translate(
+            -50%,
+            -50%
+        );
+}
+
+
+/* référence */
+
+.opening-reference {
+    margin-bottom: 18px;
+
+    font-size: 0.5rem;
+
+    letter-spacing: 0.16em;
+}
+
+
+/* =========================================================
+   LOGO
+========================================================= */
+
+.opening-brand-mask {
+    width: 100%;
+
+    display: flex;
+
+    justify-content: center;
+}
+
+
+.opening-logo {
+    width:
+        min(
+            72vw,
+            310px
+        );
+
+    max-width: 100%;
+
+    height: auto;
+}
+
+
+/* =========================================================
+   RED RULE
+========================================================= */
+
+.opening-rule {
+    width: 100%;
+
+    margin-top: 28px;
+}
+
+
+/* =========================================================
+   META
+========================================================= */
+
+.opening-meta {
+    margin-top: 14px;
+
+    gap: 20px;
+
+    font-size: 0.58rem;
+
+    letter-spacing: 0.11em;
+}
+
+
+.opening-meta span:last-child {
+    text-align: right;
+}
+
+
+/* =========================================================
+   COORDINATES
+========================================================= */
+
+.opening-coordinates {
+    left: 75px;
+    right: 75px;
+
+    width: auto;
+
+    bottom:
+        max(
+            34px,
+            calc(env(safe-area-inset-bottom) + 18px)
+        );
+
+    display: flex;
+
+    justify-content: space-between;
+    align-items: center;
+
+    gap: 20px;
+
+    white-space: nowrap;
+
+    font-size: 0.44rem;
+    letter-spacing: 0.1em;
+}
 }
 
 
@@ -3348,36 +3554,7 @@ span:last-child {
     letter-spacing: 0.12em;
 }
 
-.mobile-nav-contact {
-    margin-top: auto;
 
-    position: relative;
-
-    background:
-        var(--signal);
-
-    color:
-        var(--white);
-
-    border-top:
-        0;
-}
-
-
-.mobile-nav-contact:hover {
-    background:
-        var(--signal-dark);
-}
-
-
-.mobile-nav-contact-arrow {
-    margin-left: auto;
-
-    font-size: 1rem;
-
-    color:
-        var(--white);
-}
 
 
 .mobile-nav a span {
@@ -4100,4 +4277,197 @@ span:last-child {
         line-height: 1.75;
     }
 
+}
+
+/* =========================================================
+   FLÈCHES — VERSION CSS
+   évite les emojis iOS
+========================================================= */
+
+.home-metier-arrow,
+.home-realisation-arrow,
+.home-metiers-cta span:last-child,
+.home-realisations-cta span:last-child,
+.home-contact-location-arrow,
+.home-contact-cta span:last-child,
+.mobile-nav-contact-arrow,
+.nav-contact span:last-child {
+    position: relative;
+
+    font-size: 0 !important;
+
+    color: inherit;
+}
+
+
+/* POINTE */
+
+.home-metier-arrow::before,
+.home-realisation-arrow::before,
+.home-metiers-cta span:last-child::before,
+.home-realisations-cta span:last-child::before,
+.home-contact-location-arrow::before,
+.home-contact-cta span:last-child::before,
+.mobile-nav-contact-arrow::before,
+.nav-contact span:last-child::before {
+    content: "";
+
+    width: 9px;
+    height: 9px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    border-top:
+        1.5px solid
+        currentColor;
+
+    border-right:
+        1.5px solid
+        currentColor;
+
+    transform:
+        translate(-30%, -70%);
+}
+
+
+/* DIAGONALE */
+
+.home-metier-arrow::after,
+.home-realisation-arrow::after,
+.home-metiers-cta span:last-child::after,
+.home-realisations-cta span:last-child::after,
+.home-contact-location-arrow::after,
+.home-contact-cta span:last-child::after,
+.mobile-nav-contact-arrow::after,
+.nav-contact span:last-child::after {
+    content: "";
+
+    width: 14px;
+    height: 1.5px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    background:
+        currentColor;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(-45deg);
+
+    transform-origin:
+        center;
+}
+
+/* =========================================================
+   HERO CTA ARROW — NO EMOJI IOS
+========================================================= */
+
+.hero-cta-arrow {
+    position: relative;
+
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 18px;
+
+    font-size: 0 !important;
+}
+
+
+/* POINTE ↘ */
+
+.hero-cta-arrow::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    position: absolute;
+
+    right: 1px;
+    bottom: 1px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+}
+
+
+/* DIAGONALE */
+
+.hero-cta-arrow::after {
+    content: "";
+
+    width: 14px;
+    height: 1.5px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    background: currentColor;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
+}
+
+/* =========================================================
+   HERO CTA ARROW — NO EMOJI IOS
+========================================================= */
+
+.hero-cta-arrow {
+    position: relative;
+
+    width: 18px;
+    height: 18px;
+
+    flex: 0 0 18px;
+
+    font-size: 0 !important;
+}
+
+
+/* POINTE ↘ */
+
+.hero-cta-arrow::before {
+    content: "";
+
+    width: 8px;
+    height: 8px;
+
+    position: absolute;
+
+    right: 1px;
+    bottom: 1px;
+
+    border-right: 1.5px solid currentColor;
+    border-bottom: 1.5px solid currentColor;
+}
+
+
+/* DIAGONALE */
+
+.hero-cta-arrow::after {
+    content: "";
+
+    width: 14px;
+    height: 1.5px;
+
+    position: absolute;
+
+    top: 50%;
+    left: 50%;
+
+    background: currentColor;
+
+    transform:
+        translate(-50%, -50%)
+        rotate(45deg);
 }

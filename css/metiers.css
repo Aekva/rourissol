@@ -982,3 +982,9 @@ span:last-child {
     }
 
 }
+
+.home-metier-arrow {
+    font-family: Arial, Helvetica, sans-serif;
+    font-style: normal;
+    font-variant-emoji: text;
+}
